@@ -41,7 +41,6 @@ class Login extends Component {
         })
         try {
             let userData = await handleLogin(username, password);
-            console.log('check code')
             if (userData && userData.errorCode !== 0) {
                 this.setState({
                     isErrorLogin: userData.message
