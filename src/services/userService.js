@@ -7,4 +7,12 @@ const getAllUser = async (id) => {
     let users = await axios.get(`/api/get-user?id=${id}`);
     return users
 }
-export { handleLogin, getAllUser }
+const createNewUserService = async (data) => {
+    let user = await axios.post('/api/create-new-user', data);
+    return user
+}
+const deleteUser = async (user) => {
+    let res = await axios.delete('/api/delete-user', { data: { id: user.id } });
+    return res
+}
+export { handleLogin, getAllUser, createNewUserService, deleteUser }

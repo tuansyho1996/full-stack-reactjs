@@ -1,0 +1,21 @@
+.form-create-new-user{
+    .row-container{
+        .input{
+            label{
+                display: block;
+            }
+            input{
+                width: 100%;
+                padding: 5px;
+            }
+            width: 50%;  
+            &.address-input{
+                width: 100%;
+            }
+        }
+        display: flex;
+        gap: 10px;
+        align-items: end;
+    }
+    
+}
