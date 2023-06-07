@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import './UserManage.scss';
 import { getAllUser } from '../../services/userService';
 import ModalManageCreateUser from './ModalManageCreateUser';
-import { createNewUserService, deleteUser } from '../../services/userService';
+import ModalManageEditUser from './ModalManageEditUser';
+import { createNewUserService, deleteUser, editUserService } from '../../services/userService';
 import { ToastContainer, toast } from 'react-toastify';
 import { emitter } from '../../utils/emitter';
 
@@ -14,6 +15,8 @@ class UserManage extends Component {
         this.state = {
             users: [],
             isModal: false,
+            isModalEditUser: false,
+            userCurrentEdit: {}
         }
     }
 
@@ -34,12 +37,17 @@ class UserManage extends Component {
             isModal: !this.state.isModal
         })
     }
-    createNewUser = async (data) => {
-        let validateInput = false;
+    handleUseToggleModalEditUser = () => {
+        this.setState({
+            isModalEditUser: !this.state.isModalEditUser
+        })
+    }
+    validateInput = (data) => {
+        let isValidateInput = false;
         let arrKeyInput = ['email', 'password', 'firstName', 'lastName', 'address'];
         for (let i = 0; i < arrKeyInput.length; i++) {
             if (!data[arrKeyInput[i]]) {
-                validateInput = true;
+                isValidateInput = true;
                 toast.error(`Missing ${arrKeyInput[i]}`)
                 this.setState({
                     isModal: true
@@ -47,7 +55,11 @@ class UserManage extends Component {
                 break;
             }
         }
-        if (!validateInput) {
+        return isValidateInput
+    }
+    createNewUser = async (data) => {
+        let isValidateInput = this.validateInput(data);
+        if (!isValidateInput) {
             console.log('check run ')
             try {
                 let response = await createNewUserService(data);
@@ -92,14 +104,38 @@ class UserManage extends Component {
             console.log(e)
         }
     }
+    handleClickEditUser = async (user) => {
+        this.setState({
+            isModalEditUser: !this.state.isModalEditUser,
+            userCurrentEdit: user
+        })
+    }
+    handleSaveChangeUser = async (data) => {
+        let isValidateInput = this.validateInput(data);
+        if (!isValidateInput) {
+            try {
+                let res = await editUserService(data);
+                if (res && res.errorCode === 0) {
+                    toast.success(res.message);
+                    let users = await getAllUser('ALL');
+                    this.setState({
+                        users: users
+                    })
+                }
+            }
+            catch (e) {
+                console.log(e)
+            }
+        }
+    }
 
     render() {
-        let { users, isModal } = this.state;
+        let { users, isModal, isModalEditUser } = this.state;
         return (
             <div className='mt-5 mx-5'>
                 <ToastContainer
                     position="top-center"
-                    autoClose={5000}
+                    autoClose={1000}
                 />
 
                 <ModalManageCreateUser
@@ -107,6 +143,17 @@ class UserManage extends Component {
                     handleUseToggle={this.handleUseToggle}
                     createNewUser={this.createNewUser}
                 />
+
+                {isModalEditUser &&
+                    <ModalManageEditUser
+                        isModalEditUser={this.state.isModalEditUser}
+                        userCurrentEdit={this.state.userCurrentEdit}
+                        handleUseToggleModalEditUser={this.handleUseToggleModalEditUser}
+                        handleSaveChangeUser={this.handleSaveChangeUser}
+                    />
+                }
+
+
                 <h1 className='text-center'>TABLE USER WITH ME</h1>
                 <div>
                     <button
@@ -133,7 +180,7 @@ class UserManage extends Component {
                                         <td>{item.email}</td>
                                         <td>{item.address}</td>
                                         <td>
-                                            <span>
+                                            <span onClick={() => this.handleClickEditUser(item)}>
                                                 <i className="fas fa-pencil-alt"></i>
                                             </span>
                                             <span onClick={() => this.handleClickDeleteUser(item)}>

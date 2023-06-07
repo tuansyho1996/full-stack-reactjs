@@ -15,4 +15,8 @@ const deleteUser = async (user) => {
     let res = await axios.delete('/api/delete-user', { data: { id: user.id } });
     return res
 }
-export { handleLogin, getAllUser, createNewUserService, deleteUser }
+const editUserService = async (data) => {
+    let res = await axios.put('/api/edit-user', data);
+    return res
+}
+export { handleLogin, getAllUser, createNewUserService, deleteUser, editUserService }
