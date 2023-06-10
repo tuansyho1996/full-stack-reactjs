@@ -1,4 +1,17 @@
 {
+    "homeHeader": {
+        "speciality": "Speciality",
+        "searchdoctor": "Find a specialist",
+        "health-facility": "Health facilities",
+        "select-room": "Choose a clinic",
+        "doctor": "Doctor",
+        "select-doctor": "Choose a doctor",
+        "fee": "Checkup package",
+        "check-health": "General examination",
+        "support": "Support",
+        "title1": "Medical background",
+        "title2": "Comprehensive health care"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
