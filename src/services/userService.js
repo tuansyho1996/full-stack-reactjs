@@ -19,4 +19,9 @@ const editUserService = async (data) => {
     let res = await axios.put('/api/edit-user', data);
     return res
 }
-export { handleLogin, getAllUser, createNewUserService, deleteUser, editUserService }
+
+const getAllcodeService = async (type) => {
+    let res = await axios.get(`/api/get-allcode?type=${type}`);
+    return res
+}
+export { handleLogin, getAllUser, createNewUserService, deleteUser, editUserService, getAllcodeService }

@@ -13,7 +13,6 @@ import { path } from '../utils'
 import Home from '../routes/Home';
 import HomePage from './HomePage/HomePage';
 import Login from './Auth/Login';
-import Header from './Header/Header';
 import System from '../routes/System';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
@@ -45,11 +44,8 @@ class App extends Component {
             <Fragment>
                 <Router history={history}>
                     <CustomScrollbars style={{ 'height': '100vh' }}>
-
                         <div className="main-container">
                             <ConfirmModal />
-                            {this.props.isLoggedIn && <Header />}
-
                             <span className="content-container">
                                 <Switch>
                                     <Route path={path.HOME} exact component={(Home)} />
@@ -69,7 +65,6 @@ class App extends Component {
                             }
                         </div>
                     </CustomScrollbars>
-
                 </Router>
             </Fragment>
         )
@@ -79,7 +74,6 @@ class App extends Component {
 const mapStateToProps = state => {
     return {
         started: state.app.started,
-        isLoggedIn: state.user.isLoggedIn
     };
 };
 

@@ -1,6 +1,19 @@
 @import "../../styles/common.scss";
 
 .header-container {
+    .navigator-menu {
+        li.menu.active{
+            a{
+                color: #ffc10e!important;
+            }   
+        }
+        li.menu:hover{
+            a{
+                color: #ffc10e!important;
+            }
+        }
+    }
+    
     z-index: 99;
     display: flex;
     justify-content: space-between;
@@ -8,16 +21,30 @@
     color: $common-text-color;
     height: 40px;
     position: relative;
-    .btn-logout {
-        color: $common-text-color;
-        line-height: 40px;
-        height: 40px;
-        padding: 0 10px;
-        &:hover {
-            background-color: darken($colormain, 5);
+    .header-right-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 18%;
+        .language-vi{
+            margin-right: 10px;
+            cursor: pointer;
         }
-        i {
-            font-size: $base-size + 1px;
+        .language-en{
+            cursor: pointer;
+        }
+        .btn-logout {
+            color: $common-text-color;
+            line-height: 40px;
+            height: 40px;
+            padding: 0 10px;
+            &:hover {
+                background-color: darken($colormain, 5);
+            }
+            i {
+                font-size: $base-size + 1px;
+            }
         }
     }
+    
 }
