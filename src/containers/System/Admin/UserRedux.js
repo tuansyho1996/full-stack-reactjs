@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserRedux.scss'
-import { getAllcodeService } from '../../../services/userService';
+import * as adminActions from '../../../store/actions'
 
 
 class UserRedux extends Component {
@@ -14,23 +14,22 @@ class UserRedux extends Component {
         }
     }
 
-    async componentDidMount() {
-        try {
-            let res = await getAllcodeService('gender');
-            if (res) {
-                this.setState({
-                    gender: res.data
-                })
-            }
-        }
-        catch (e) {
-            console.log(e)
+    componentDidMount() {
+        this.props.fetchGenderStartRedux();
+
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.gender !== this.props.gender) {
+            this.setState({
+                gender: this.props.gender
+            })
         }
     }
 
 
     render() {
-        let { gender } = this.state;
+        let { gender } = this.state
         return (
             <React.Fragment>
                 <div className="text-center mt-4" >
@@ -109,12 +108,14 @@ class UserRedux extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language
+        language: state.app.language,
+        gender: state.admin.gender
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchGenderStartRedux: () => dispatch(adminActions.fetchGenderStart())
     };
 };
 
