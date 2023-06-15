@@ -24,4 +24,7 @@ const getAllcodeService = async (type) => {
     let res = await axios.get(`/api/get-allcode?type=${type}`);
     return res
 }
-export { handleLogin, getAllUser, createNewUserService, deleteUser, editUserService, getAllcodeService }
+
+
+
+export { handleLogin, getAllUser, createNewUserService, deleteUser, editUserService, getAllcodeService, }
