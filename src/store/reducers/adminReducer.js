@@ -4,6 +4,7 @@ const initialState = {
     isLoadingGender: false,
     gender: [],
     role: [],
+    users: [],
 }
 
 const appReducer = (state = initialState, action) => {
@@ -52,11 +53,30 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
-        case actionTypes.ADMIN_FETCH_POSITION_FAIL:
+        case actionTypes.ADMIN_CREATE_USER_FAIL:
+
             return {
                 ...state,
             }
-
+        //FETCH USERS
+        case actionTypes.ADMIN_FETCH_USERS_SUCCESS:
+            state.users = action.users
+            return {
+                ...state,
+            }
+        case actionTypes.ADMIN_FETCH_USERS_FAIL:
+            return {
+                ...state,
+            }
+        //DELETE USER
+        case actionTypes.ADMIN_DELETE_USER_SUCCESS:
+            return {
+                ...state,
+            }
+        case actionTypes.ADMIN_DELETE_USER_FAIL:
+            return {
+                ...state,
+            }
         default:
             return state;
     }
