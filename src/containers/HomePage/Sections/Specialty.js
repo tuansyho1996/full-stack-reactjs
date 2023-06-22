@@ -26,13 +26,8 @@ class Specialty extends Component {
             { img: imgTraditional, title: 'Y học cổ truyền' },
             { img: imgAcupuncture, title: 'Châm cứu' }];
         let arrTitleSpecialty = [, , , , , , ,];
-        let settings = {
-            infinite: true,
-            speed: 500,
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            adaptiveHeight: true
-        };
+        let settings = this.props.settings;
+
         return (
             <div className='specialty-container'>
                 <div className='specialty-content container'>

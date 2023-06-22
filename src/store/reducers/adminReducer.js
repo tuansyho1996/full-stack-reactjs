@@ -77,6 +77,15 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+        //EDIT USER
+        case actionTypes.ADMIN_EDIT_USER_SUCCESS:
+            return {
+                ...state,
+            }
+        case actionTypes.ADMIN_EDIT_USER_FAIL:
+            return {
+                ...state,
+            }
         default:
             return state;
     }

@@ -24,7 +24,11 @@ const getAllcodeService = async (type) => {
     let res = await axios.get(`/api/get-allcode?type=${type}`);
     return res
 }
+const fetchTopDoctorHomepageService = async (limit) => {
+    let res = await axios.get(`/api/get-top-doctor-homepage?limit=${limit}`);
+    return res
+}
 
 
 
-export { handleLogin, getAllUser, createNewUserService, deleteUser, editUserService, getAllcodeService, }
+export { handleLogin, getAllUser, createNewUserService, deleteUser, editUserService, getAllcodeService, fetchTopDoctorHomepageService }

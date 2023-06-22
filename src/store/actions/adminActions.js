@@ -101,9 +101,9 @@ export const createNewUserStart = (data) => {
         try {
             let res = await createNewUserService(data);
             if (res && res.errorCode === 0) {
-                dispatch(createNewUserSuccess(res));
-                dispatch(fetchUsersStart());
+                await dispatch(createNewUserSuccess(res));
                 toast.success('Create user success')
+                dispatch(fetchUsersStart());
             }
             else if (res && res.errorCode === 1) {
                 dispatch(createNewUserFail());

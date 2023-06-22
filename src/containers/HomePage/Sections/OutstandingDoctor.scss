@@ -1,0 +1,55 @@
+.outstandingDoctor-container{
+    background-color: #f5f5f5;
+    
+    
+    .outstandingDoctor-content{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-bottom: 20px;
+        .slick-slider{
+            height: 100%;
+            .outstandingDoctor-element{
+                .avartar-doctor{
+                    // height: 300px;
+                }
+            }
+        }
+        
+        .outstandingDoctor-title{
+            padding-top: 35px;
+            h2{
+                display: inline;
+                font-weight: 600;
+            }
+        }
+        .slick-list{
+            .slick-track{
+                .slick-slide{
+                    img{
+                        width: 95%;
+                    }
+
+                }
+            }
+        }
+        .slick-arrow{
+            top: 45%;
+            &.slick-prev{
+                left: 0px;
+                z-index: 1000;
+                
+            }
+            &.slick-next{
+                right: 35px;
+            }
+            &::before{
+                font-size: 40px;
+                color: black;
+            }
+            
+        }
+    }
+    
+    
+}

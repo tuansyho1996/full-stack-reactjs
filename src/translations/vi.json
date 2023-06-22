@@ -13,6 +13,9 @@
         "title2": "Chăm sóc sức khỏe toàn diện",
         "wellcome": "Xin chào"
     },
+    "section": {
+        "outstanding-doctor": "Bác sĩ nổi bậc"
+    },
     "login": {
         "login": "Đăng nhập",
         "username": "Tên đăng nhập",

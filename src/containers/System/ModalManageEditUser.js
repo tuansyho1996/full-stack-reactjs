@@ -43,6 +43,8 @@ class ModalManageEditUser extends Component {
         })
     }
 
+    
+
     clickSaveChange = () => {
         let data = {
             id: this.state.id,

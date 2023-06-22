@@ -2,7 +2,8 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
     isLoggedIn: false,
-    userInfo: null
+    userInfo: null,
+    topDoctors: []
 }
 
 const appReducer = (state = initialState, action) => {
@@ -24,6 +25,17 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: false,
                 userInfo: null
+            }
+        //FETCH TOP DOCTOR HOMEPAGE
+        case actionTypes.ADMIN_FETCH_TOP_DOCTOR_HOMEPAGE_SUCCESS:
+            state.topDoctors = action.res;
+            console.log('check res topDoctor', action.res)
+            return {
+                ...state,
+            }
+        case actionTypes.ADMIN_FETCH_TOP_DOCTOR_HOMEPAGE_FAIL:
+            return {
+                ...state,
             }
         default:
             return state;

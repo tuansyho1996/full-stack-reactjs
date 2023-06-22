@@ -13,6 +13,9 @@
         "title2": "Comprehensive health care",
         "wellcome": "Wellcome"
     },
+    "section": {
+        "outstanding-doctor": "Outstanding doctor"
+    },
     "login": {
         "login": "Login",
         "username": "Username",
