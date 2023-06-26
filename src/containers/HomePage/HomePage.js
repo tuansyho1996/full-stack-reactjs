@@ -25,7 +25,7 @@ class HomePage extends Component {
                 <Specialty
                     settings={this.state.settings}
                 />
-                <hr />
+                {/* <hr /> */}
                 <OutstandingDoctor
                     settings={this.state.settings}
                 />

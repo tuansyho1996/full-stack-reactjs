@@ -219,7 +219,7 @@ class UserRedux extends Component {
                                 <select value={role} onChange={(event) => this.handleChangeInput(event, 'role')} id="inputRole" className="form-control">
                                     {arrRole && arrRole.length !== 0 &&
                                         arrRole.map((item, index) => {
-                                          
+
                                             return (
                                                 <option value={item.keyMap} keyMap={index}>
                                                     {
@@ -290,7 +290,7 @@ class UserRedux extends Component {
                         onCloseRequest={() => this.setState({ isOpen: false })}
                     />
                 )}
-                <ToastContainer />
+                {/* <ToastContainer /> */}
 
             </React.Fragment>
         )

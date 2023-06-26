@@ -30,8 +30,8 @@ class OutstandingDoctor extends Component {
         this.setState({
             arrTopDoctors: this.props.topDoctors
         })
-
-        // imageBase64 = new Buffer(user.image, 'base64').toString('binary');
+    }
+    handleClickTopDoctor = (user) => {
 
     }
 
@@ -52,8 +52,13 @@ class OutstandingDoctor extends Component {
                             arrTopDoctors.map((item) => {
                                 return (
                                     <div className='outstandingDoctor-element'>
-                                        <img src={item.image} />
-                                        <div className='text-uppercase mt-2'>{item.firstName} &nbsp; {item.lastName}</div>
+                                        <div className='img-top-doctor' >
+                                            <div className='bg-img-top-doctor'
+                                                style={{ backgroundImage: `url(${item.image})` }}
+                                                onClick={() => this.handleClickTopDoctor(item)}
+                                            ></div>
+                                        </div>
+                                        <div className='text-uppercase mt-2 text-center'>{item.firstName} &nbsp; {item.lastName}</div>
                                     </div>
                                 )
                             })

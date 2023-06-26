@@ -29,7 +29,7 @@ class Specialty extends Component {
         let settings = this.props.settings;
 
         return (
-            <div className='specialty-container'>
+            <div className='specialty-container py-5'>
                 <div className='specialty-content container'>
                     <div className='specialty-title'>
                         <h2>Chuyên khoa phổ biến </h2> &nbsp;

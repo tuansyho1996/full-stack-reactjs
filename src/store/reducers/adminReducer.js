@@ -5,6 +5,7 @@ const initialState = {
     gender: [],
     role: [],
     users: [],
+    doctorSelects: []
 }
 
 const appReducer = (state = initialState, action) => {
@@ -83,6 +84,25 @@ const appReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.ADMIN_EDIT_USER_FAIL:
+            return {
+                ...state,
+            }
+        //FETCH DOCTOR SELECT
+        case actionTypes.ADMIN_FETCH_DOCTOR_SELECT_SUCCESS:
+            state.doctorSelects = action.res
+            return {
+                ...state,
+            }
+        case actionTypes.ADMIN_FETCH_DOCTOR_SELECT_FAIL:
+            return {
+                ...state,
+            }
+        // CREATE DOCTOR MARKDOWN
+        case actionTypes.ADMIN_CREATE_DOCTOR_MARKDOWN_SUCCESS:
+            return {
+                ...state,
+            }
+        case actionTypes.ADMIN_CREATE_DOCTOR_MARKDOWN_FAIL:
             return {
                 ...state,
             }

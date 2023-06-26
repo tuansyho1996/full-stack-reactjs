@@ -1,6 +1,10 @@
 import actionTypes from './actionTypes';
 import { getAllcodeService } from '../../services/userService';
-import { createNewUserService, getAllUser, deleteUser, editUserService } from '../../services/userService';
+import {
+    createNewUserService, getAllUser, deleteUser, editUserService, fetchDoctorSlectService,
+    createDoctorMarkdownService
+} from '../../services/userService';
+
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -209,4 +213,63 @@ export const editUserSuccess = () => ({
 export const editUserFail = () => ({
     type: actionTypes.ADMIN_EDIT_USER_FAIL,
 })
+
+//FETCH DOCTOR SELECT
+
+export const fetchDoctorSelectStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await fetchDoctorSlectService();
+            if (res && res.errorCode === 0) {
+                dispatch(fetchDoctorSelectSuccess(res.data));
+            }
+            else {
+                dispatch(fetchDoctorSelectfail());
+            }
+        }
+        catch (e) {
+            dispatch(fetchDoctorSelectfail());
+        }
+    }
+}
+
+export const fetchDoctorSelectSuccess = (res) => ({
+    type: actionTypes.ADMIN_FETCH_DOCTOR_SELECT_SUCCESS,
+    res
+})
+
+export const fetchDoctorSelectfail = () => ({
+    type: actionTypes.ADMIN_FETCH_DOCTOR_SELECT_FAIL,
+})
+
+// CREATE DOCTOR MARKDOWN 
+
+export const createDoctorMarkdownStart = (inputData) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await createDoctorMarkdownService(inputData);
+            if (res && res.errorCode === 0) {
+                dispatch(createDoctorMarkdownSucces());
+                toast.success('Create user success')
+
+            }
+            else {
+                dispatch(createDoctorMarkdownFail());
+                toast.error('Create user fail')
+
+            }
+        }
+        catch (e) {
+            dispatch(createDoctorMarkdownFail());
+        }
+    }
+}
+export const createDoctorMarkdownSucces = () => ({
+    type: actionTypes.ADMIN_CREATE_DOCTOR_MARKDOWN_SUCCESS,
+})
+
+export const createDoctorMarkdownFail = () => ({
+    type: actionTypes.ADMIN_CREATE_DOCTOR_MARKDOWN_FAIL,
+})
+
 

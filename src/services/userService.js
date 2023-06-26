@@ -28,7 +28,18 @@ const fetchTopDoctorHomepageService = async (limit) => {
     let res = await axios.get(`/api/get-top-doctor-homepage?limit=${limit}`);
     return res
 }
+const fetchDoctorSlectService = async () => {
+    let res = await axios.get('/api/get-doctor-select');
+    return res
+}
+const createDoctorMarkdownService = async (inputData) => {
+    let res = await axios.post('/api/create-doctor-markdown', inputData);
+    return res
+}
 
 
-
-export { handleLogin, getAllUser, createNewUserService, deleteUser, editUserService, getAllcodeService, fetchTopDoctorHomepageService }
+export {
+    handleLogin, getAllUser, createNewUserService, deleteUser, editUserService,
+    getAllcodeService, fetchTopDoctorHomepageService, fetchDoctorSlectService,
+    createDoctorMarkdownService
+}
