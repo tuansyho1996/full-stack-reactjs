@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as userAction from '../../store/actions';
+import Header from './Header/Header';
+import Infomation from './Sections/Infomation';
 
 
 class DetailDoctor extends Component {
@@ -23,10 +25,14 @@ class DetailDoctor extends Component {
     }
     render() {
         let { infoDoctor } = this.state;
-        console.log('check state info doctor', infoDoctor)
         return (
             <div className=''>
-                wellcome detail doctor
+                <Header
+                    infoDoctor={infoDoctor}
+                />
+                <div className='container-section container'>
+                    <Infomation />
+                </div>
             </div>
         );
     }
