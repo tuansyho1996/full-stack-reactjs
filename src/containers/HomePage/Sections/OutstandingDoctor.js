@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import './OutstandingDoctor.scss';
 import * as userAction from '../../../store/actions';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 
 
 
@@ -49,15 +50,20 @@ class OutstandingDoctor extends Component {
                     <Slider {...settings}>
                         {
                             arrTopDoctors && arrTopDoctors.length > 0 &&
-                            arrTopDoctors.map((item) => {
+                            arrTopDoctors.map((item, index) => {
                                 return (
-                                    <div className='outstandingDoctor-element'>
-                                        <div className='img-top-doctor' >
-                                            <div className='bg-img-top-doctor'
-                                                style={{ backgroundImage: `url(${item.image})` }}
-                                                onClick={() => this.handleClickTopDoctor(item)}
-                                            ></div>
-                                        </div>
+                                    <div className='outstandingDoctor-element' key={index}>
+                                        <Link
+                                            to={{
+                                                pathname: `/detail-doctor/${item.id}`,
+                                            }} >
+                                            <div className='img-top-doctor' >
+                                                <div className='bg-img-top-doctor'
+                                                    style={{ backgroundImage: `url(${item.image})` }}
+                                                    onClick={() => this.handleClickTopDoctor(item)}
+                                                ></div>
+                                            </div>
+                                        </Link>
                                         <div className='text-uppercase mt-2 text-center'>{item.firstName} &nbsp; {item.lastName}</div>
                                     </div>
                                 )

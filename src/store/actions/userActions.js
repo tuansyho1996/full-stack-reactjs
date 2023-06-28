@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { fetchTopDoctorHomepageService } from '../../services/userService'
+import { fetchTopDoctorHomepageService, fetchDetailADoctor } from '../../services/userService'
 
 export const addUserSuccess = () => ({
     type: actionTypes.ADD_USER_SUCCESS
@@ -46,4 +46,30 @@ export const fetchTopDoctorHomepageSuccess = (res) => ({
 
 export const fetchTopDoctorHomepageFail = () => ({
     type: actionTypes.ADMIN_FETCH_TOP_DOCTOR_HOMEPAGE_FAIL,
+})
+
+//FETCH DETAIL DOCTOR 
+export const fetchDetailDoctorStart = (id) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await fetchDetailADoctor(id);
+            if (res && res.errorCode === 0) {
+                dispatch(fetchDetailDoctorSuccess(res.user));
+            }
+            else {
+                dispatch(fetchDetailDoctorFail());
+            }
+        }
+        catch (e) {
+            dispatch(fetchDetailDoctorFail());
+        }
+    }
+}
+export const fetchDetailDoctorSuccess = (res) => ({
+    type: actionTypes.USER_FETCH_DETAIL_DOCTOR_SUCCESS,
+    res
+})
+
+export const fetchDetailDoctorFail = () => ({
+    type: actionTypes.USER_FETCH_DETAIL_DOCTOR_FAIL,
 })

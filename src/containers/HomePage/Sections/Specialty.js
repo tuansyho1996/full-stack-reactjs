@@ -38,9 +38,9 @@ class Specialty extends Component {
                     <Slider {...settings}>
                         {
                             arrSpecialty &&
-                            arrSpecialty.map((item) => {
+                            arrSpecialty.map((item, index) => {
                                 return (
-                                    <div>
+                                    <div key={index}>
                                         <img src={item.img} />
                                         <span>{item.title}</span>
                                     </div>

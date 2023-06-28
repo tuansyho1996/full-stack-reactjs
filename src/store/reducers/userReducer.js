@@ -3,7 +3,8 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     isLoggedIn: false,
     userInfo: null,
-    topDoctors: []
+    topDoctors: [],
+    infoDoctor: {}
 }
 
 const appReducer = (state = initialState, action) => {
@@ -34,6 +35,16 @@ const appReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.ADMIN_FETCH_TOP_DOCTOR_HOMEPAGE_FAIL:
+            return {
+                ...state,
+            }
+        //FETCH DETAIL DOCTOR
+        case actionTypes.USER_FETCH_DETAIL_DOCTOR_SUCCESS:
+            state.infoDoctor = action.res;
+            return {
+                ...state,
+            }
+        case actionTypes.USER_FETCH_DETAIL_DOCTOR_FAIL:
             return {
                 ...state,
             }

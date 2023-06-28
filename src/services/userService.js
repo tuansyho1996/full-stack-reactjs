@@ -36,10 +36,14 @@ const createDoctorMarkdownService = async (inputData) => {
     let res = await axios.post('/api/create-doctor-markdown', inputData);
     return res
 }
+const fetchDetailADoctor = async (id) => {
+    let res = await axios.get(`/api/fetch-a-user/${id}`);
+    return res
+}
 
 
 export {
     handleLogin, getAllUser, createNewUserService, deleteUser, editUserService,
     getAllcodeService, fetchTopDoctorHomepageService, fetchDoctorSlectService,
-    createDoctorMarkdownService
+    createDoctorMarkdownService, fetchDetailADoctor
 }
