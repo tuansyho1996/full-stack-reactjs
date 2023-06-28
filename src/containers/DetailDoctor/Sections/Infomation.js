@@ -12,11 +12,15 @@ class Information extends Component {
         }
     }
     componentDidMount() {
-    }
-    componentDidUpdate(prevProps, prevState) {
 
     }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.infoDoctor !== this.props.infoDoctor) {
+            console.log('check info doctor props information', this.props.infoDoctor)
+        }
+    }
     render() {
+        let { infoDoctor } = this.state;
         return (
             <div className='infomation-detail-doctor-container'>
                 <nav aria-label="breadcrumb">
@@ -26,6 +30,12 @@ class Information extends Component {
                         <li className="breadcrumb-item ">Data</li>
                     </ol>
                 </nav>
+                <div className='info-doctor-content'>
+                    <div className='avartar-doctor'>
+                        <div className='bg-image'></div>
+                    </div>
+                    <div className='description-doctor'></div>
+                </div>
             </div>
         );
     }
@@ -34,6 +44,7 @@ class Information extends Component {
 
 const mapStateToProps = state => {
     return {
+        infoDoctor: state.user.infoDoctor
     };
 };
 

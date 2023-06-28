@@ -53,6 +53,9 @@ export const fetchDetailDoctorStart = (id) => {
     return async (dispatch, getState) => {
         try {
             let res = await fetchDetailADoctor(id);
+            if (res) {
+                res.user.image = await new Buffer(res.user.image, 'base64').toString('binary');
+            }
             if (res && res.errorCode === 0) {
                 dispatch(fetchDetailDoctorSuccess(res.user));
             }

@@ -15,9 +15,10 @@ class DetailDoctor extends Component {
     componentDidMount() {
         this.props.fetchDetailDoctor(this.props.match.params.id);
     }
-    componentDidUpdate(prevProps, prevState) {
+    async componentDidUpdate(prevProps, prevState) {
         if (prevProps.infoDoctor !== this.props.infoDoctor) {
             console.log('check data info doctor', this.props.infoDoctor)
+
             this.setState({
                 infoDoctor: this.props.infoDoctor
             })
