@@ -26,3 +26,7 @@ export const YesNoObj = {
     YES: 'Y',
     NO: 'N'
 }
+export const keyRoleId = {
+    ADMIN: 'R1',
+    DOCTOR: 'R2'
+}

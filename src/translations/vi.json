@@ -46,7 +46,12 @@
             "handbook": "Cẩm nang",
             "manageClinic": "Quản lý phòng khám",
             "manageSpecialty": "Quản lý chuyên khoa",
-            "manageHandbook": "Manage cẩm nang"
+            "manageHandbook": "Manage cẩm nang",
+            "manageDoctorSchedule": "Quản lý lịch khám bác sĩ"
+        },
+        "doctor": {
+            "manageDoctorSchedule": "Quản lý lịch khám bác sĩ",
+            "userSystem": "Người dùng"
         }
     },
     "manage-user": {

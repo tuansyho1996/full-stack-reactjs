@@ -86,7 +86,8 @@ class DoctorManageRedux extends Component {
                 this.props.createDoctorMarkdown({
                     contentHTML: this.state.contentHTML,
                     contentMarkdown: this.state.contentMarkdown,
-                    doctorId: this.state.selectedOption.value
+                    doctorId: this.state.selectedOption.value,
+                    description: this.state.textareaValue
                 })
             }
         }

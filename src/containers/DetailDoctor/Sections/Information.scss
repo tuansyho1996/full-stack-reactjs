@@ -4,4 +4,42 @@
         font-size: 18px;
         color: #49bce2;
     }
+    .info-doctor-content{
+        .avartar-doctor{
+            display: flex;
+            justify-content: center;
+            .bg-image{
+                width: 100%;
+            aspect-ratio : 1 / 1;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 50%;
+            }
+        }
+        .description-doctor{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            .title-doctor{
+                text-transform: capitalize;
+            }
+        }
+    }
+    .schedule-info-doctor{
+        .schedule{
+            select{
+                font-size: 18px;
+                padding: 10px 0;
+                padding: 5px 0;
+                border-radius: 3px;
+                color: #49bce2;
+                outline: none;
+            }
+        }
+        .info{
+        }
+    }
+    
+    
 }

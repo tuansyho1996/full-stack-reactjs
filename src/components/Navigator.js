@@ -9,6 +9,8 @@ class MenuGroup extends Component {
 
     render() {
         const { name, children } = this.props;
+        console.log('check props navigator', this.props)
+
         return (
             <li className="menu-group">
                 <div className="menu-group-name">
@@ -23,8 +25,8 @@ class MenuGroup extends Component {
 }
 
 class Menu extends Component {
-
     render() {
+
         const { name, active, link, children, onClick, hasSubMenu, onLinkClick } = this.props;
         return (
             <li className={"menu" + (hasSubMenu ? " has-sub-menu" : "") + ("") + (active ? " active" : "")}>
@@ -48,10 +50,10 @@ class Menu extends Component {
                         </div>
                     </Fragment>
                 ) : (
-                        <Link to={link} className="menu-link" onClick={onLinkClick}>
-                            <FormattedMessage id={name} />
-                        </Link>
-                    )}
+                    <Link to={link} className="menu-link" onClick={onLinkClick}>
+                        <FormattedMessage id={name} />
+                    </Link>
+                )}
             </li>
         );
     }
