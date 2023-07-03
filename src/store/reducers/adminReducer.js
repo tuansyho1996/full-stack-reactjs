@@ -5,7 +5,8 @@ const initialState = {
     gender: [],
     role: [],
     users: [],
-    doctorSelects: []
+    doctorSelects: [],
+    arrTimeAllcode: []
 }
 
 const appReducer = (state = initialState, action) => {
@@ -103,6 +104,16 @@ const appReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.ADMIN_CREATE_DOCTOR_MARKDOWN_FAIL:
+            return {
+                ...state,
+            }
+        //FETCH TIME ALLCODE
+        case actionTypes.ADMIN_FETCH_TIME_ALLCODE_SUCCESS:
+            state.arrTimeAllcode = action.data
+            return {
+                ...state,
+            }
+        case actionTypes.ADMIN_FETCH_TIME_ALLCODE_FAIL:
             return {
                 ...state,
             }

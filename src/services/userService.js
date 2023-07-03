@@ -40,10 +40,15 @@ const fetchDetailADoctor = async (id) => {
     let res = await axios.get(`/api/fetch-a-user/${id}`);
     return res
 }
+const bulkCreateSchedule = async (data) => {
+    let res = await axios.post('/api/bulk-create-schedule', data)
+    return res
+}
+
 
 
 export {
     handleLogin, getAllUser, createNewUserService, deleteUser, editUserService,
     getAllcodeService, fetchTopDoctorHomepageService, fetchDoctorSlectService,
-    createDoctorMarkdownService, fetchDetailADoctor
+    createDoctorMarkdownService, fetchDetailADoctor, bulkCreateSchedule
 }

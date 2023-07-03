@@ -250,7 +250,7 @@ export const createDoctorMarkdownStart = (inputData) => {
             let res = await createDoctorMarkdownService(inputData);
             if (res && res.errorCode === 0) {
                 dispatch(createDoctorMarkdownSucces());
-                toast.success('Create user success')
+                toast.success(res.message)
 
             }
             else {
@@ -270,6 +270,34 @@ export const createDoctorMarkdownSucces = () => ({
 
 export const createDoctorMarkdownFail = () => ({
     type: actionTypes.ADMIN_CREATE_DOCTOR_MARKDOWN_FAIL,
+})
+
+// FETCH TIME ALLCODE
+
+export const fetchTimeAllcodeStart = (type) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllcodeService(type);
+            console.log('check run start fetch time', res)
+            if (res && res.errorCode === 0) {
+                dispatch(fetchTimeAllcodeSucces(res.data));
+            }
+            else {
+                dispatch(fetchTimeAllcodeFail());
+            }
+        }
+        catch (e) {
+            dispatch(fetchTimeAllcodeFail());
+        }
+    }
+}
+export const fetchTimeAllcodeSucces = (data) => ({
+    type: actionTypes.ADMIN_FETCH_TIME_ALLCODE_SUCCESS,
+    data
+})
+
+export const fetchTimeAllcodeFail = () => ({
+    type: actionTypes.ADMIN_FETCH_TIME_ALLCODE_FAIL,
 })
 
 

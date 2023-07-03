@@ -8,7 +8,8 @@ import MdEditor from 'react-markdown-editor-lite';
 import Select from 'react-select';
 import * as adminActions from '../../../store/actions';
 import { toast } from 'react-toastify';
-
+import { fetchDetailADoctor } from '../../../services/userService';
+import _ from 'lodash';
 
 
 
@@ -30,7 +31,9 @@ class DoctorManageRedux extends Component {
             textareaValue: '',
             arrDoctorVi: [],
             contentHTML: '',
-            contentMarkdown: ''
+            contentMarkdown: '',
+            isMarkdownDoctor: false,
+            isOldData: false
         }
     }
 
@@ -39,6 +42,7 @@ class DoctorManageRedux extends Component {
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.arrDoctor !== this.props.arrDoctor) {
+            console.log(this.props.arrDoctor)
             let options = [];
             this.props.arrDoctor.map((item, index) => {
                 options.push({ value: item.id, label: `${item.firstName} ${item.lastName}` });
@@ -55,10 +59,29 @@ class DoctorManageRedux extends Component {
         })
         console.log('handleEditorChange', html, text);
     }
-    handleChange = (selectedOption) => {
-        this.setState({ selectedOption }, () =>
-            console.log(`Option selected:`, this.state.selectedOption)
-        );
+    handleChange = async (selectedOption) => {
+        let doctorSelect = this.props.arrDoctor.find(item => item.id === selectedOption.value);
+        if (doctorSelect.Markdown.id !== null) {
+            this.setState({
+                selectedOption,
+                textareaValue: doctorSelect.Markdown.description,
+                contentHTML: doctorSelect.Markdown.contentHTML,
+                contentMarkdown: doctorSelect.Markdown.contentMarkdown,
+                isOldData: true
+            })
+        }
+        else {
+            this.setState({
+                selectedOption,
+                textareaValue: '',
+                contentHTML: '',
+                contentMarkdown: '',
+                isOldData: false
+            }, () =>
+                console.log(`Option selected:`, this.state.selectedOption)
+            );
+        }
+
     };
     handleChangeTextarea = (event) => {
         this.setState({
@@ -74,7 +97,6 @@ class DoctorManageRedux extends Component {
         else {
             let arrCheck = [contentHTML, contentMarkdown];
             for (let i = 0; i < arrCheck.length; i++) {
-                console.log('check element check', arrCheck[i])
                 if (!arrCheck[i]) {
                     validateParameter = false
                     toast.error('Missing content');
@@ -82,21 +104,21 @@ class DoctorManageRedux extends Component {
                 }
             }
             if (validateParameter) {
-                console.log('checl id doctor', selectedOption.value)
-                this.props.createDoctorMarkdown({
+                await this.props.createDoctorMarkdown({
                     contentHTML: this.state.contentHTML,
                     contentMarkdown: this.state.contentMarkdown,
                     doctorId: this.state.selectedOption.value,
                     description: this.state.textareaValue
                 })
+
             }
         }
 
     }
     render() {
-        console.log('check arr doctor redux props', this.state.arrDoctorVi)
-
-        let { textareaValue, arrDoctorVi } = this.state
+        console.log('check state', this.state)
+        let { textareaValue, arrDoctorVi, isOldData } = this.state
+        console.log('check old data', isOldData)
         return (
             <div className='my-5 px-5'>
                 <div className="text-center " >
@@ -116,9 +138,14 @@ class DoctorManageRedux extends Component {
                     </div>
 
                 </div>
-                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} />
+                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} value={this.state.contentMarkdown} />
                 <div className='button-submit'>
-                    <button onClick={() => this.handleSubmitCreate()} className='btn-primary my-3'>Sumit</button>
+                    {isOldData ?
+                        <button onClick={() => this.handleSubmitCreate()} className='btn-warning my-3'>Lưu thông tin</button>
+                        :
+                        <button onClick={() => this.handleSubmitCreate()} className='btn-primary my-3'>Tạo</button>
+
+                    }
                 </div>
             </div >
         )

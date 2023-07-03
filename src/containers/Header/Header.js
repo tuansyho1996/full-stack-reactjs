@@ -38,7 +38,6 @@ class Header extends Component {
     }
 
     render() {
-        console.log('check admin menu', this.props.userInfo)
         const { processLogout, userInfo } = this.props;
 
         return (
