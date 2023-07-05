@@ -44,11 +44,14 @@ const bulkCreateSchedule = async (data) => {
     let res = await axios.post('/api/bulk-create-schedule', data)
     return res
 }
-
+const fetchTimeSchedule = async (doctorId, date) => {
+    let res = await axios.get(`/api/fetch-schedule-doctor?doctorId=${doctorId}&date=${date}`);
+    return res
+}
 
 
 export {
     handleLogin, getAllUser, createNewUserService, deleteUser, editUserService,
     getAllcodeService, fetchTopDoctorHomepageService, fetchDoctorSlectService,
-    createDoctorMarkdownService, fetchDetailADoctor, bulkCreateSchedule
+    createDoctorMarkdownService, fetchDetailADoctor, bulkCreateSchedule, fetchTimeSchedule
 }

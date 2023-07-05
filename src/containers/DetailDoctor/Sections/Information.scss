@@ -27,7 +27,8 @@
         }
     }
     .schedule-info-doctor{
-        .schedule{
+        .content-right-info-schedule-doctor{
+            border-right: solid 1px #555;
             select{
                 font-size: 18px;
                 padding: 10px 0;
@@ -38,6 +39,18 @@
             }
         }
         .info{
+        }
+        .examination-time{
+
+            .time-element{
+                font-size: 16px;
+                background-color: #999;
+                padding: 10px;
+                margin: 5px;
+                color: #eee;
+                cursor: pointer;
+                width: 120px;
+            }
         }
     }
     

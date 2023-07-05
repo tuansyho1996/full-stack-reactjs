@@ -33,7 +33,8 @@ class DoctorManageRedux extends Component {
             contentHTML: '',
             contentMarkdown: '',
             isMarkdownDoctor: false,
-            isOldData: false
+            isOldData: false,
+            selectedOptionPrice: '',
         }
     }
 
@@ -115,29 +116,74 @@ class DoctorManageRedux extends Component {
         }
 
     }
+    handleChangeOther = async (value) => {
+        console.log(value)
+    }
     render() {
-        console.log('check state', this.state)
+        // console.log('check state', this.state)
         let { textareaValue, arrDoctorVi, isOldData } = this.state
-        console.log('check old data', isOldData)
+        // console.log('check old data', isOldData)
         return (
             <div className='my-5 px-5'>
                 <div className="text-center " >
                     <h2 className='my-5'>MANAGE USER REDUX WITH ME</h2>
                 </div>
-                <div className='information-doctor row mb-3'>
-                    <div className='select-option-react col-6'>
-                        <Select
-                            value={this.state.selectedOption}
-                            onChange={this.handleChange}
-                            options={arrDoctorVi}
-                        />
-                    </div>
+                <form>
+                    <div className='information-doctor row mb-3'>
+                        <div className='select-option-react col-6'>
+                            <lable className="form-label">Chọn bác sĩ</lable>
+                            <Select
+                                value={this.state.selectedOption}
+                                onChange={this.handleChange}
+                                options={arrDoctorVi}
+                            />
+                        </div>
+                        <div className='additional-information col-6'>
+                            <lable className="form-label">Thông tin giới thiệu</lable>
+                            <textarea value={textareaValue} onChange={(event) => this.handleChangeTextarea(event)} className='form-control'></textarea>
+                        </div>
 
-                    <div className='additional-information col-6'>
-                        <textarea value={textareaValue} onChange={(event) => this.handleChangeTextarea(event)} className='form-control'></textarea>
-                    </div>
+                        <div className='choose-price col-4 mt-3'>
+                            <lable className="form-label">Chọn giá</lable>
+                            <Select
+                                value={this.state.selectedOptionPrice}
+                                onChange={this.handleChangeOther}
+                            // options={arrDoctorVi}
+                            />
+                        </div>
+                        <div className='payment-methods col-4 mt-3'>
+                            <lable className="form-label">Phương thức thanh toán</lable>
+                            <Select
+                                value={this.state.selectedOptionPaymentMethods}
+                                onChange={this.handleChangeOther}
+                            // options={arrDoctorVi}
+                            />
+                        </div>
+                        <div className='choose-province col-4 mt-3'>
+                            <lable className="form-label">Chọn tỉnh thành</lable>
+                            <Select
+                                value={this.state.selectedOptionChooseProvince}
+                                onChange={this.handleChangeOther}
+                            // options={arrDoctorVi}
+                            />
+                        </div>
 
-                </div>
+                        <div className='name-clinic col-4 mt-3'>
+                            <lable className="form-label">Tên phòng khám</lable>
+                            <input type="" class="form-control" />
+                        </div>
+                        <div className='address-clinic col-4 mt-3'>
+                            <lable className="form-label">Đỉa chỉ phòng khám</lable>
+                            <input type="" class="form-control" />
+                        </div>
+                        <div className='note col-4 mt-3'>
+                            <lable className="form-label">Ghi chú</lable>
+                            <input type="" class="form-control" />
+                        </div>
+
+
+                    </div>
+                </form>
                 <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={this.handleEditorChange} value={this.state.contentMarkdown} />
                 <div className='button-submit'>
                     {isOldData ?

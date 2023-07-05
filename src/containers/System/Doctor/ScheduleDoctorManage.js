@@ -58,9 +58,16 @@ class ScheduleDoctorManage extends Component {
         })
     }
     handleChangeDate = (e) => {
-        this.setState({
-            date: e[0],
-        })
+        let dateUnix = moment(e[0]).startOf("day").valueOf();
+        console.log('check value e pick date', dateUnix)
+        // let dateUnix = e[0].toString();
+        if (dateUnix) {
+            console.log('check date unix', dateUnix)
+            this.setState({
+                date: dateUnix,
+            })
+        }
+
     }
     handleClickPickTime = (index) => {
         let arrTimeCopy = this.state.arrTime;
@@ -84,11 +91,11 @@ class ScheduleDoctorManage extends Component {
             }
         }
         // let formatDate = moment(date).format("DD/MM/YYYY");
-        let formatDate = Date.parse(date)
+        // let formatDate = Date.parse(date)
         timeSelected.map(time => {
             let obj = {};
             obj.doctorId = selectedDoctor.value;
-            obj.date = formatDate;
+            obj.date = date;
             obj.timeType = time.keyMap;
             arrResult.push(obj);
         })

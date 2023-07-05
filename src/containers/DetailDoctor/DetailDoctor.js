@@ -32,7 +32,9 @@ class DetailDoctor extends Component {
                     infoDoctor={infoDoctor}
                 />
                 <div className='container-section container'>
-                    <Infomation />
+                    <Infomation
+                        paramsId={this.props.match.params.id}
+                    />
                 </div>
             </div>
         );
