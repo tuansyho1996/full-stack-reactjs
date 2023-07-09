@@ -67,6 +67,14 @@
         "role": "Role",
         "avatar": "Avatar",
         "create": "Create",
-        "save-edit": "Save edit"
+        "save-edit": "Save edit",
+        "choose-doctor": "Choose doctor",
+        "description": "Description",
+        "choose-price": "Choose price",
+        "payment-method": "Payment method",
+        "choose-province": "Choose province",
+        "name-clinic": "Name clinic",
+        "address-clinic": "Address clinic",
+        "note": "Note"
     }
 }

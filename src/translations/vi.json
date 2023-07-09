@@ -67,6 +67,14 @@
         "role": "Vai trò",
         "avatar": "Ảnh đại diện",
         "create": "Tạo",
-        "save-edit": "Lưu chỉnh sửa"
+        "save-edit": "Lưu chỉnh sửa",
+        "choose-doctor": "Chọn bác sĩ",
+        "description": "Thông tin giới thiệu",
+        "choose-price": "Chọn giá",
+        "payment-method": "Phương thức thanh toán",
+        "choose-province": "Chọn tỉnh thành",
+        "name-clinic": "Tên phòng khám",
+        "address-clinic": "Địa chỉ phong khám",
+        "note": "Ghi chú"
     }
 }

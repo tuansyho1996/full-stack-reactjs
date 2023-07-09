@@ -6,7 +6,8 @@ import UserRedux from '../containers/System/Admin/UserRedux';
 import DoctorManageRedux from '../containers/System/Admin/DoctorManageRedux';
 import ScheduleDoctorManage from '../containers/System/Doctor/ScheduleDoctorManage';
 import RegisterPackageGroupOrAcc from '../containers/System/RegisterPackageGroupOrAcc';
-import Header from '../containers/Header/Header'
+import Header from '../containers/Header/Header';
+import testRedux from '../containers/System/Admin/testRedux';
 
 
 class System extends Component {
@@ -19,6 +20,7 @@ class System extends Component {
                     <div className="system-list">
                         <Switch>
                             <Route path="/system/user-manage" component={UserManage} />
+                            <Route path="/system/test-redux" component={testRedux} />
                             <Route path="/system/user-redux-manage" component={UserRedux} />
                             <Route path="/system/doctor-manage" component={DoctorManageRedux} />
                             <Route path="/system/doctor-schedule-manage" component={ScheduleDoctorManage} />

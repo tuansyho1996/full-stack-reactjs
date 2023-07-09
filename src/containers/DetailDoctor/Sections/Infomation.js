@@ -92,9 +92,8 @@ class Information extends Component {
                     </div>
                 </div>
                 <div className='schedule-info-doctor row my-3'>
-                    <div className='content-right-info-schedule-doctor col-7'>
+                    <div className='content-left-info-schedule-doctor col-7'>
                         <select onChange={(event) => this.handleChangeTime(event)} className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-
                             {arrTimeSlectdate && arrTimeSlectdate.length !== 0 &&
                                 arrTimeSlectdate.map((time, index) => {
                                     return (
@@ -121,8 +120,12 @@ class Information extends Component {
                             }
                         </div>
                     </div>
-                    <div className='content-left-info-schedule-doctor col-5'>
-
+                    <div className='content-right-info-schedule-doctor col-5'>
+                        <div className='title-address-clinic'>ĐỊA CHỈ KHÁM</div>
+                        <div className='name-clinic'>{infoDoctor.InfoDoctor.nameClinic}</div>
+                        <div className='address-clinic'>{infoDoctor.InfoDoctor.addressClinic}</div>
+                        <div className='title-price'>GIÁ KHÁM</div>
+                        <div className='price'>{infoDoctor.InfoDoctor.price}</div>
                     </div>
                 </div>
                 <hr />

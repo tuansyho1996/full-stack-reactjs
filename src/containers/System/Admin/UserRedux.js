@@ -164,13 +164,13 @@ class UserRedux extends Component {
     }
     render() {
         let { role, position, gender, statusAction, arrGender, arrRole, arrPosition, previewImg, isOpen, email, password, firstName, lastName, phonenumber, address, } = this.state
-        console.log('check state statusAction', statusAction);
-        console.log('fetch users', this.props.listUsers)
+        console.log('check arr gender', this.props.arrGender)
         return (
             <React.Fragment>
                 <div className="text-center mt-4" >
                     <h2 className='title-user-redux'>MANAGE USER REDUX WITH ME</h2>
                     {this.props.isLoadingGender ? <h2>LOADING GENDER</h2> : ''}
+                    {this.props.arrGender.length === 0 ? <span>empty array</span> : <span>array not empty</span>}
                 </div>
                 <div className='form-create-new-user-redux container mt-5'>
                     <form className='mb-5'>

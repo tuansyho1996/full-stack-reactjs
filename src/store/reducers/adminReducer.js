@@ -6,7 +6,10 @@ const initialState = {
     role: [],
     users: [],
     doctorSelects: [],
-    arrTimeAllcode: []
+    arrTimeAllcode: [],
+    priceSelect: [],
+    provinceSelect: [],
+    paymentMethodSelect: []
 }
 
 const appReducer = (state = initialState, action) => {
@@ -117,6 +120,36 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+        //FETCH KEY INFO DOCTOR ALLCODE
+        case actionTypes.ADMIN_FETCH_INFO_DOCTOR_ALLCODE_SUCCESS:
+
+            if (action.res.key === 'price') {
+                return {
+                    ...state,
+                    priceSelect: action.res.data
+                }
+            }
+            if (action.res.key === 'province') {
+                console.log(`check run start KEY INFO DOCTOR ${action.res.key}  time`, action.res.data)
+
+                return {
+                    ...state,
+                    provinceSelect: action.res.data
+                }
+            }
+            if (action.res.key === 'payment') {
+                console.log(`check run start KEY INFO DOCTOR ${action.res.key}  time`, action.res.data)
+                return {
+                    ...state,
+                    paymentMethodSelect: action.res.data
+                }
+            }
+
+        case actionTypes.ADMIN_FETCH_INFO_DOCTOR_ALLCODE_FAIL:
+            return {
+                ...state,
+            }
+
         default:
             return state;
     }

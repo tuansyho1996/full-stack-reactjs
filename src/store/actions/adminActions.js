@@ -2,7 +2,7 @@ import actionTypes from './actionTypes';
 import { getAllcodeService } from '../../services/userService';
 import {
     createNewUserService, getAllUser, deleteUser, editUserService, fetchDoctorSlectService,
-    createDoctorMarkdownService
+    createDoctorMarkdownService, fetchKeyInfoDoctorAllcodeSelectService, createInfoDoctorService
 } from '../../services/userService';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -299,5 +299,63 @@ export const fetchTimeAllcodeSucces = (data) => ({
 export const fetchTimeAllcodeFail = () => ({
     type: actionTypes.ADMIN_FETCH_TIME_ALLCODE_FAIL,
 })
+
+// FETCH KEY INFO DOCTOR ALLCODE
+
+export const fetchKeyInfoDoctorAllcodeSelectStart = (key) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await fetchKeyInfoDoctorAllcodeSelectService(key);
+            if (res && res.errorCode === 0) {
+                dispatch(fetchKeyInfoDoctorAllcodeSelectSucces({
+                    key,
+                    data: res.data
+                }));
+            }
+            else {
+                dispatch(fetchKeyInfoDoctorAllcodeSelectFail());
+            }
+        }
+        catch (e) {
+            dispatch(fetchKeyInfoDoctorAllcodeSelectFail());
+        }
+    }
+}
+export const fetchKeyInfoDoctorAllcodeSelectSucces = (res) => ({
+    type: actionTypes.ADMIN_FETCH_INFO_DOCTOR_ALLCODE_SUCCESS,
+    res
+})
+
+export const fetchKeyInfoDoctorAllcodeSelectFail = () => ({
+    type: actionTypes.ADMIN_FETCH_INFO_DOCTOR_ALLCODE_FAIL,
+})
+
+// CREATE INFO DOCTOR
+export const createInfoDoctorStart = (inputData) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await createInfoDoctorService(inputData);
+            if (res && res.errorCode === 0) {
+                dispatch(createInfoDoctorSucces(res.data));
+            }
+            else {
+                dispatch(createInfoDoctorFail());
+            }
+        }
+        catch (e) {
+            dispatch(createInfoDoctorFail());
+        }
+    }
+}
+export const createInfoDoctorSucces = (res) => ({
+    type: actionTypes.ADMIN_CREATE_INFO_DOCTOR__SUCCESS,
+    res
+})
+
+export const createInfoDoctorFail = () => ({
+    type: actionTypes.ADMIN_CREATE_INFO_DOCTOR__FAIL,
+})
+
+
 
 
