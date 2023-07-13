@@ -56,11 +56,20 @@ const fetchTimeSchedule = async (doctorId, date) => {
     let res = await axios.get(`/api/fetch-schedule-doctor?doctorId=${doctorId}&date=${date}`);
     return res
 }
+const fetchInfoDoctorService = async (doctorId) => {
+    let res = await axios.get(`/api/fetch-info-doctor?id=${doctorId}`);
+    return res
+}
+const createAppointmentScheduleService = async (data) => {
+    let res = await axios.post('/api/book-appointment-schedule', data);
+    return res
+}
 
 
 export {
     handleLogin, getAllUser, createNewUserService, deleteUser, editUserService,
     getAllcodeService, fetchTopDoctorHomepageService, fetchDoctorSlectService,
     createDoctorMarkdownService, fetchDetailADoctor, bulkCreateSchedule, fetchTimeSchedule,
-    fetchKeyInfoDoctorAllcodeSelectService, createInfoDoctorService
+    fetchKeyInfoDoctorAllcodeSelectService, createInfoDoctorService, fetchInfoDoctorService,
+    createAppointmentScheduleService
 }

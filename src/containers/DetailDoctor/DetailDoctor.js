@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import * as userAction from '../../store/actions';
 import Header from './Header/Header';
 import Infomation from './Sections/Infomation';
+import { Markup } from "react-render-markup";
+import ChooseScheduleAndInfoDoctor from './Sections/ChooseScheduleAndInfoDoctor';
+
 
 
 class DetailDoctor extends Component {
@@ -17,8 +20,6 @@ class DetailDoctor extends Component {
     }
     async componentDidUpdate(prevProps, prevState) {
         if (prevProps.infoDoctor !== this.props.infoDoctor) {
-            console.log('check data info doctor', this.props.infoDoctor)
-
             this.setState({
                 infoDoctor: this.props.infoDoctor
             })
@@ -33,9 +34,18 @@ class DetailDoctor extends Component {
                 />
                 <div className='container-section container'>
                     <Infomation
+                    />
+                    <ChooseScheduleAndInfoDoctor
                         paramsId={this.props.match.params.id}
                     />
+                    <hr />
+                    <div className='markdown-detail-doctor-content my-5'>
+                        {infoDoctor && infoDoctor.Markdown &&
+                            <Markup markup={infoDoctor.Markdown.contentHTML} />
+                        }
+                    </div>
                 </div>
+
             </div>
         );
     }

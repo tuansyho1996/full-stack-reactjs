@@ -1,0 +1,26 @@
+// .modal-book-schedule-container{
+    .detail-content-doctor{
+        .avatar-doctor{
+            width: 100%;
+            aspect-ratio : 1 / 1;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 50%;
+        }
+        .description-doctor{
+            display: flex;
+            align-items: center;
+        }
+        .time-pick{
+            font-size: 16px;
+        }
+        .price-doctor{
+            font-size: 16px;
+            display: block;
+        }
+        .date-pick{
+            font-size: 16px;
+        }
+    }
+// }

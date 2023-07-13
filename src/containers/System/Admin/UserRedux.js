@@ -301,7 +301,7 @@ class UserRedux extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        arrGender: state.admin.gender,
+        arrGender: state.admin.gender, 
         isLoadingGender: state.admin.isLoadingGender,
         arrRole: state.admin.role,
         arrPosition: state.admin.position,

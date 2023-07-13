@@ -25,34 +25,5 @@
                 text-transform: capitalize;
             }
         }
-    }
-    .schedule-info-doctor{
-        .content-left-info-schedule-doctor{
-            border-right: solid 1px #aaa;
-            select{
-                font-size: 18px;
-                padding: 10px 0;
-                padding: 5px 0;
-                border-radius: 3px;
-                color: #49bce2;
-                outline: none;
-            }
-        }
-        .info{
-        }
-        .examination-time{
-
-            .time-element{
-                font-size: 16px;
-                background-color: #999;
-                padding: 10px;
-                margin: 5px;
-                color: #eee;
-                cursor: pointer;
-                width: 120px;
-            }
-        }
-    }
-    
-    
+    }   
 }

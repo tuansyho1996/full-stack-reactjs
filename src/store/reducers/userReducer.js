@@ -4,7 +4,8 @@ const initialState = {
     isLoggedIn: false,
     userInfo: null,
     topDoctors: [],
-    infoDoctor: {}
+    infoDoctor: {},
+    infoDoctorSchedule: {},
 }
 
 const appReducer = (state = initialState, action) => {
@@ -30,7 +31,6 @@ const appReducer = (state = initialState, action) => {
         //FETCH TOP DOCTOR HOMEPAGE
         case actionTypes.ADMIN_FETCH_TOP_DOCTOR_HOMEPAGE_SUCCESS:
             state.topDoctors = action.res;
-            console.log('check res topDoctor', action.res)
             return {
                 ...state,
             }
@@ -45,6 +45,25 @@ const appReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.USER_FETCH_DETAIL_DOCTOR_FAIL:
+            return {
+                ...state,
+            }
+        //FETCH INFO DOCTOR
+        case actionTypes.USER_FETCH_INFO_DOCTOR_SUCCESS:
+            state.infoDoctorSchedule = action.res;
+            return {
+                ...state,
+            }
+        case actionTypes.USER_FETCH_INFO_DOCTOR_FAIL:
+            return {
+                ...state,
+            }
+        //CREATE BOOK APPOINTMENT SCHEDULE
+        case actionTypes.USER_CREATE_APPOINTMENT_SCHEDULE_SUCCESS:
+            return {
+                ...state,
+            }
+        case actionTypes.USER_CREATE_APPOINTMENT_SCHEDULE_FAIL:
             return {
                 ...state,
             }

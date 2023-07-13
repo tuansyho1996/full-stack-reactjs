@@ -1,0 +1,59 @@
+.schedule-info-doctor{
+    .content-left-info-schedule-doctor{
+        border-right: solid 1px #aaa;
+        select{
+            font-size: 18px;
+            padding: 10px 0;
+            padding: 5px 0;
+            border-radius: 3px;
+            color: #49bce2;
+            outline: none;
+        }
+    }
+    .content-right-info-schedule-doctor{
+        .title-address-clinic {
+            font-size: 18px;
+            color: #666;
+        }
+        .name-clinic {
+            font-weight: 600;
+        }
+        hr{
+            background-color: #aaa;
+            margin: 10px 0;
+        }
+        .price-doctor-content{
+            .price{
+                font-size: 16px;
+            }
+            .title-price {
+                @extend .title-address-clinic
+            }
+            .see-more-price{
+                cursor: pointer;
+            }
+            .see-more-content{
+                .hide-content-price{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .info{
+    }
+    .examination-time{
+        .time-element{
+            border: solid 2px #fff;
+            font-size: 16px;
+            background-color: #999;
+            padding: 10px;
+            margin: 5px;
+            color: #eee;
+            cursor: pointer;
+            width: 120px;
+            &:hover{
+                border: solid 2px #007bff;
+            }
+        }
+    }
+}

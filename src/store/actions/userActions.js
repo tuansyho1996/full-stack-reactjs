@@ -1,5 +1,9 @@
 import actionTypes from './actionTypes';
-import { fetchTopDoctorHomepageService, fetchDetailADoctor } from '../../services/userService'
+import {
+    fetchTopDoctorHomepageService, fetchDetailADoctor, fetchInfoDoctorService,
+    createAppointmentScheduleService
+} from '../../services/userService'
+import { toast } from 'react-toastify';
 
 export const addUserSuccess = () => ({
     type: actionTypes.ADD_USER_SUCCESS
@@ -75,4 +79,52 @@ export const fetchDetailDoctorSuccess = (res) => ({
 
 export const fetchDetailDoctorFail = () => ({
     type: actionTypes.USER_FETCH_DETAIL_DOCTOR_FAIL,
+})
+
+//FETCH INFO DOCTOR
+export const fetchInfoDoctorStart = (id) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await fetchInfoDoctorService(id);
+            dispatch(fetchInfoDoctorSuccess(res.user));
+        }
+        catch (e) {
+            dispatch(fetchInfoDoctorFail());
+        }
+    }
+}
+export const fetchInfoDoctorSuccess = (res) => ({
+    type: actionTypes.USER_FETCH_INFO_DOCTOR_SUCCESS,
+    res
+})
+
+export const fetchInfoDoctorFail = () => ({
+    type: actionTypes.USER_FETCH_INFO_DOCTOR_FAIL,
+})
+// CREATE BOOK APPOINTMENT SCHEDULE
+export const createAppointmentScheduleStart = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await createAppointmentScheduleService(data)
+            dispatch(createAppointmentScheduleSuccess(res));
+            if (res.errorCode === 0) {
+                toast.success('Book appointment schedule success')
+            }
+            else {
+                toast.error('Error system')
+            }
+        }
+        catch (e) {
+            dispatch(createAppointmentScheduleFail());
+
+        }
+    }
+}
+export const createAppointmentScheduleSuccess = (res) => ({
+    type: actionTypes.USER_CREATE_APPOINTMENT_SCHEDULE_SUCCESS,
+    res
+})
+
+export const createAppointmentScheduleFail = () => ({
+    type: actionTypes.USER_CREATE_APPOINTMENT_SCHEDULE_FAIL,
 })
