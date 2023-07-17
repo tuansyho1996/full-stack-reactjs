@@ -21,7 +21,9 @@ class HomePage extends Component {
     render() {
         return (
             <div className='home-page'>
-                <Header />
+                <Header
+                    isBanner={true}
+                />
                 <Specialty
                     settings={this.state.settings}
                 />

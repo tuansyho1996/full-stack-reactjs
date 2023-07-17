@@ -8,8 +8,11 @@ import { changeLanguage } from '../../store/actions';
 
 
 class Header extends Component {
-
-
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
     handleClickChangeLanguage = (language) => {
         // console.log('check click change language', language)
         this.props.changeLanguageAppRedux(language)
@@ -53,48 +56,51 @@ class Header extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='home-banner-container'>
-                    <div className='banner-content'>
-                        <div className='banner-title-1'><FormattedMessage id='homeHeader.title1' /></div>
-                        <div className='banner-title-2'><FormattedMessage id='homeHeader.title2' /></div>
-                        <div className='banner-search'>
-                            <i className="fas fa-search"></i>
-                            <input />
-                        </div>
-                        <div className='banner-option'>
-                            <div className='option-element'>
-                                <div className='container-logo-option'>
-                                    <i className="fas fa-hospital"></i>
-                                </div>
-                                <div className='option-title'>Khám <br /> chuyên khoa</div>
+                {this.props.isBanner &&
+                    <div className='home-banner-container'>
+                        <div className='banner-content'>
+                            <div className='banner-title-1'><FormattedMessage id='homeHeader.title1' /></div>
+                            <div className='banner-title-2'><FormattedMessage id='homeHeader.title2' /></div>
+                            <div className='banner-search'>
+                                <i className="fas fa-search"></i>
+                                <input />
                             </div>
-                            <div className='option-element'>
-                                <div className='container-logo-option'>
-                                    <i className="fas fa-phone"></i>
+                            <div className='banner-option'>
+                                <div className='option-element'>
+                                    <div className='container-logo-option'>
+                                        <i className="fas fa-hospital"></i>
+                                    </div>
+                                    <div className='option-title'>Khám <br /> chuyên khoa</div>
                                 </div>
-                                <div className='option-title'>Khám<br /> từ xa</div>
-                            </div>
-                            <div className='option-element'>
-                                <div className='container-logo-option'>
-                                    <i className="fas fa-notes-medical"></i>
+                                <div className='option-element'>
+                                    <div className='container-logo-option'>
+                                        <i className="fas fa-phone"></i>
+                                    </div>
+                                    <div className='option-title'>Khám<br /> từ xa</div>
                                 </div>
-                                <div className='option-title'>Khám<br /> tổng quát</div>
-                            </div>
-                            <div className='option-element'>
-                                <div className='container-logo-option'>
-                                    <i className="fas fa-ambulance"></i>
+                                <div className='option-element'>
+                                    <div className='container-logo-option'>
+                                        <i className="fas fa-notes-medical"></i>
+                                    </div>
+                                    <div className='option-title'>Khám<br /> tổng quát</div>
                                 </div>
-                                <div className='option-title'>Sản phẩm <br />y tế</div>
-                            </div>
-                            <div className='option-element'>
-                                <div className='container-logo-option'>
-                                    <i className="fas fa-toolbox"></i>
+                                <div className='option-element'>
+                                    <div className='container-logo-option'>
+                                        <i className="fas fa-ambulance"></i>
+                                    </div>
+                                    <div className='option-title'>Sản phẩm <br />y tế</div>
                                 </div>
-                                <div className='option-title'>Khám<br /> nha khoa</div>
+                                <div className='option-element'>
+                                    <div className='container-logo-option'>
+                                        <i className="fas fa-toolbox"></i>
+                                    </div>
+                                    <div className='option-title'>Khám<br /> nha khoa</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+
             </React.Fragment>
 
         );

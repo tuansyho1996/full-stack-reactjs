@@ -15,6 +15,7 @@ import HomePage from './HomePage/HomePage';
 import DetailDoctor from './DetailDoctor/DetailDoctor'
 import Login from './Auth/Login';
 import System from '../routes/System';
+import VerifyBookingEmail from './VerifyBookingEmail/VerifyBookingEmail';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 import CustomScrollbars from '../components/CustomScrollbars'
@@ -52,6 +53,7 @@ class App extends Component {
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.HOME_PAGE} component={(HomePage)} />
                                     <Route path={path.DETAIL_DOCTOR} component={(DetailDoctor)} />
+                                    <Route path={path.VERIFY_BOOKING_EMAIL} component={(VerifyBookingEmail)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                 </Switch>

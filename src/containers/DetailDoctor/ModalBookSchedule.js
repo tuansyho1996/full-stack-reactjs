@@ -48,8 +48,8 @@ class ModalBookSchedule extends Component {
     toggleBookSchedule = () => {
         this.props.handleToggleBookSchedule()
     }
-    handleClickCreateAppointmentSchedule = () => {
-        this.props.createAppointmentSchedule({
+    handleClickCreateAppointmentSchedule = async () => {
+        await this.props.createAppointmentSchedule({
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             email: this.state.email,
@@ -57,9 +57,11 @@ class ModalBookSchedule extends Component {
             reason: this.state.reason,
             phonenumber: this.state.phonenumber,
             gender: this.state.gender,
-            date: this.props.timePick.date,
-            timeType: this.props.timePick.timeData.keyMap,
-            doctorId: this.state.infoDoctor.id
+            time: this.props.timePick,
+            dateHtml: this.state.dateHtml,
+            doctorId: this.state.infoDoctor.id,
+            firstNameDoctor: this.state.infoDoctor.firstName,
+            lastNameDoctor: this.state.infoDoctor.lastName,
         });
         this.setState({
             firstName: '',
@@ -81,6 +83,7 @@ class ModalBookSchedule extends Component {
     }
     render() {
         let { infoDoctor, dateHtml, arrGender } = this.state;
+        console.log('check time', this.props.timePick)
         return (
             <Modal isOpen={this.props.isModal} toggle={this.toggleBookSchedule} size='lg'>
                 <ModalHeader toggle={this.toggleBookSchedule}>Thông tin đặt lịch khám bệnh</ModalHeader>
@@ -172,7 +175,10 @@ class ModalBookSchedule extends Component {
                 </div >
                 <ModalFooter>
                     <Button color="primary px-2" onClick={this.handleClickCreateAppointmentSchedule}>
-                        Do Something
+                        Xác nhận
+                    </Button>
+                    <Button color="secondary px-2" onClick={this.toggleBookSchedule}>
+                        Hủy
                     </Button>
                 </ModalFooter>
 

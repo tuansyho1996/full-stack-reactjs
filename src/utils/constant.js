@@ -2,6 +2,7 @@ export const path = {
     HOME: '/',
     HOME_PAGE: '/home',
     DETAIL_DOCTOR: '/detail-doctor/:id',
+    VERIFY_BOOKING_EMAIL: '/verify-booking',
     LOGIN: '/login',
     LOG_OUT: '/logout',
     SYSTEM: '/system'

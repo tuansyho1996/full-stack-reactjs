@@ -65,11 +65,16 @@ const createAppointmentScheduleService = async (data) => {
     return res
 }
 
+const fetchVerifyBookingEmailService = async (token, doctorId) => {
+    let res = await axios.get(`/api/verify-email-book-appointment-schedule?token=${token}&doctorId=${doctorId}`);
+    return res
+}
+
 
 export {
     handleLogin, getAllUser, createNewUserService, deleteUser, editUserService,
     getAllcodeService, fetchTopDoctorHomepageService, fetchDoctorSlectService,
     createDoctorMarkdownService, fetchDetailADoctor, bulkCreateSchedule, fetchTimeSchedule,
     fetchKeyInfoDoctorAllcodeSelectService, createInfoDoctorService, fetchInfoDoctorService,
-    createAppointmentScheduleService
+    createAppointmentScheduleService, fetchVerifyBookingEmailService
 }

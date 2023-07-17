@@ -1,7 +1,7 @@
 import actionTypes from './actionTypes';
 import {
     fetchTopDoctorHomepageService, fetchDetailADoctor, fetchInfoDoctorService,
-    createAppointmentScheduleService
+    createAppointmentScheduleService, fetchVerifyBookingEmailService
 } from '../../services/userService'
 import { toast } from 'react-toastify';
 
@@ -27,7 +27,6 @@ export const processLogout = () => ({
 export const fetchTopDoctorHomepageStart = (limit) => {
     return async (dispatch, getState) => {
         try {
-            console.log('check action top doctor homepage', limit)
 
             let res = await fetchTopDoctorHomepageService(+limit);
             if (res && res.errorCode === 0) {
@@ -111,12 +110,16 @@ export const createAppointmentScheduleStart = (data) => {
                 toast.success('Book appointment schedule success')
             }
             else {
-                toast.error('Error system')
+                if (res.errorCode === 1) {
+                    toast.error(res.message)
+                }
+                else {
+                    toast.error('Error system')
+                }
             }
         }
         catch (e) {
             dispatch(createAppointmentScheduleFail());
-
         }
     }
 }
@@ -127,4 +130,27 @@ export const createAppointmentScheduleSuccess = (res) => ({
 
 export const createAppointmentScheduleFail = () => ({
     type: actionTypes.USER_CREATE_APPOINTMENT_SCHEDULE_FAIL,
+})
+//FETCH VERIFY BOOKING EMAIL
+
+export const fetchVerifyBookingEmailStart = (token, doctorId) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await fetchVerifyBookingEmailService(token, doctorId)
+            if (res.errorCode === 0) {
+                dispatch(fetchVerifyBookingEmailSuccess(res));
+            }
+        }
+        catch (e) {
+            dispatch(fetchVerifyBookingEmailFail());
+        }
+    }
+}
+export const fetchVerifyBookingEmailSuccess = (res) => ({
+    type: actionTypes.USER_FETCH_VERIFY_BOOKING_EMAIL_SUCCESS,
+    res
+})
+
+export const fetchVerifyBookingEmailFail = () => ({
+    type: actionTypes.USER_FETCH_VERIFY_BOOKING_EMAIL_FAIL,
 })

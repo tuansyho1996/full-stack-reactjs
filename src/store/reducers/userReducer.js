@@ -6,6 +6,7 @@ const initialState = {
     topDoctors: [],
     infoDoctor: {},
     infoDoctorSchedule: {},
+    isVerifyBookingEmail: false
 }
 
 const appReducer = (state = initialState, action) => {
@@ -64,6 +65,16 @@ const appReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.USER_CREATE_APPOINTMENT_SCHEDULE_FAIL:
+            return {
+                ...state,
+            }
+        //FETCH VERIFY BOOKING EMAIL
+        case actionTypes.USER_FETCH_VERIFY_BOOKING_EMAIL_SUCCESS:
+            state.isVerifyBookingEmail = true;
+            return {
+                ...state,
+            }
+        case actionTypes.USER_FETCH_VERIFY_BOOKING_EMAIL_FAIL:
             return {
                 ...state,
             }
