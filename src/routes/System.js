@@ -5,6 +5,7 @@ import UserManage from '../containers/System/UserManage';
 import UserRedux from '../containers/System/Admin/UserRedux';
 import DoctorManageRedux from '../containers/System/Admin/DoctorManageRedux';
 import ScheduleDoctorManage from '../containers/System/Doctor/ScheduleDoctorManage';
+import SpecialtyManage from '../containers/System/Specialty/SpecialtyManage';
 import RegisterPackageGroupOrAcc from '../containers/System/RegisterPackageGroupOrAcc';
 import Header from '../containers/Header/Header';
 import testRedux from '../containers/System/Admin/testRedux';
@@ -24,6 +25,8 @@ class System extends Component {
                             <Route path="/system/user-redux-manage" component={UserRedux} />
                             <Route path="/system/doctor-manage" component={DoctorManageRedux} />
                             <Route path="/system/doctor-schedule-manage" component={ScheduleDoctorManage} />
+                            <Route path="/system/specialty-manage" component={SpecialtyManage} />
+
                             <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                         </Switch>
                     </div>

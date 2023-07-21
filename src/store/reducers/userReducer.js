@@ -6,7 +6,9 @@ const initialState = {
     topDoctors: [],
     infoDoctor: {},
     infoDoctorSchedule: {},
-    isVerifyBookingEmail: false
+    isVerifyBookingEmail: false,
+    specialtyHomepage: [],
+    specialtyDetail: {}
 }
 
 const appReducer = (state = initialState, action) => {
@@ -75,6 +77,21 @@ const appReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.USER_FETCH_VERIFY_BOOKING_EMAIL_FAIL:
+            return {
+                ...state,
+            }
+        //FETCH SPECIALTY
+        case actionTypes.USER_FETCH_SPECIALTY_SUCCESS:
+            if (action.res.id === 'ALL') {
+                state.specialtyHomepage = action.res.data;
+            }
+            else {
+                state.specialtyDetail = action.res.data
+            }
+            return {
+                ...state,
+            }
+        case actionTypes.USER_FETCH_SPECIALTY_FAIL:
             return {
                 ...state,
             }

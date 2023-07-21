@@ -2,7 +2,8 @@ import actionTypes from './actionTypes';
 import { getAllcodeService } from '../../services/userService';
 import {
     createNewUserService, getAllUser, deleteUser, editUserService, fetchDoctorSlectService,
-    createDoctorMarkdownService, fetchKeyInfoDoctorAllcodeSelectService, createInfoDoctorService
+    createDoctorMarkdownService, fetchKeyInfoDoctorAllcodeSelectService, createInfoDoctorService,
+    createSpecialtyService, fetchSpecialtySelectService
 } from '../../services/userService';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -249,7 +250,7 @@ export const createDoctorMarkdownStart = (inputData) => {
         try {
             let res = await createDoctorMarkdownService(inputData);
             if (res && res.errorCode === 0) {
-                dispatch(createDoctorMarkdownSucces());
+                dispatch(createDoctorMarkdownSuccess());
                 toast.success(res.message)
 
             }
@@ -264,7 +265,7 @@ export const createDoctorMarkdownStart = (inputData) => {
         }
     }
 }
-export const createDoctorMarkdownSucces = () => ({
+export const createDoctorMarkdownSuccess = () => ({
     type: actionTypes.ADMIN_CREATE_DOCTOR_MARKDOWN_SUCCESS,
 })
 
@@ -280,7 +281,7 @@ export const fetchTimeAllcodeStart = (type) => {
             let res = await getAllcodeService(type);
             console.log('check run start fetch time', res)
             if (res && res.errorCode === 0) {
-                dispatch(fetchTimeAllcodeSucces(res.data));
+                dispatch(fetchTimeAllcodeSuccess(res.data));
             }
             else {
                 dispatch(fetchTimeAllcodeFail());
@@ -291,7 +292,7 @@ export const fetchTimeAllcodeStart = (type) => {
         }
     }
 }
-export const fetchTimeAllcodeSucces = (data) => ({
+export const fetchTimeAllcodeSuccess = (data) => ({
     type: actionTypes.ADMIN_FETCH_TIME_ALLCODE_SUCCESS,
     data
 })
@@ -336,7 +337,7 @@ export const createInfoDoctorStart = (inputData) => {
         try {
             let res = await createInfoDoctorService(inputData);
             if (res && res.errorCode === 0) {
-                dispatch(createInfoDoctorSucces(res.data));
+                dispatch(createInfoDoctorSuccess(res.data));
             }
             else {
                 dispatch(createInfoDoctorFail());
@@ -347,13 +348,65 @@ export const createInfoDoctorStart = (inputData) => {
         }
     }
 }
-export const createInfoDoctorSucces = (res) => ({
+export const createInfoDoctorSuccess = (res) => ({
     type: actionTypes.ADMIN_CREATE_INFO_DOCTOR__SUCCESS,
     res
 })
 
 export const createInfoDoctorFail = () => ({
     type: actionTypes.ADMIN_CREATE_INFO_DOCTOR__FAIL,
+})
+// CREATE SPECIALTY 
+
+export const createSpecialtyStart = (inputData) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await createSpecialtyService(inputData);
+            if (res && res.errorCode === 0) {
+                dispatch(createSpecialtySuccess());
+                toast.success('Create specialty success')
+            }
+            else {
+                dispatch(createSpecialtyFail());
+            }
+        }
+        catch (e) {
+            dispatch(createSpecialtyFail());
+        }
+    }
+}
+export const createSpecialtySuccess = () => ({
+    type: actionTypes.ADMIN_CREATE_SPECIALTY__SUCCESS,
+})
+
+export const createSpecialtyFail = () => ({
+    type: actionTypes.ADMIN_CREATE_SPECIALTY__FAIL,
+})
+
+//FETCH SPECIALTY SELECT PAGE MANAGE DOCTOR
+export const fetchSpecialtySelectStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await fetchSpecialtySelectService();
+            if (res && res.errorCode === 0) {
+                dispatch(fetchSpecialtySelectSuccess(res.data));
+            }
+            else {
+                dispatch(fetchSpecialtySelectFail());
+            }
+        }
+        catch (e) {
+            dispatch(fetchSpecialtySelectFail());
+        }
+    }
+}
+export const fetchSpecialtySelectSuccess = (data) => ({
+    type: actionTypes.ADMIN_FETCH_SPECIALTY_SELECT_SUCCESS,
+    data: data
+})
+
+export const fetchSpecialtySelectFail = () => ({
+    type: actionTypes.ADMIN_FETCH_SPECIALTY_SELECT_FAIL,
 })
 
 

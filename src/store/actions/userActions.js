@@ -1,7 +1,7 @@
 import actionTypes from './actionTypes';
 import {
     fetchTopDoctorHomepageService, fetchDetailADoctor, fetchInfoDoctorService,
-    createAppointmentScheduleService, fetchVerifyBookingEmailService
+    createAppointmentScheduleService, fetchVerifyBookingEmailService, fetchSpecialtyService
 } from '../../services/userService'
 import { toast } from 'react-toastify';
 
@@ -154,3 +154,30 @@ export const fetchVerifyBookingEmailSuccess = (res) => ({
 export const fetchVerifyBookingEmailFail = () => ({
     type: actionTypes.USER_FETCH_VERIFY_BOOKING_EMAIL_FAIL,
 })
+//FETCH SPECIALTY
+export const fetchSpecialtyStart = (id) => {
+    return async (dispatch, getState) => {
+        try {
+            console.log('check run fetch specialty')
+            let res = await fetchSpecialtyService(id)
+            if (res.errorCode === 0) {
+                dispatch(fetchSpecialtySuccess({
+                    id: id,
+                    data: res.data
+                }));
+            }
+        }
+        catch (e) {
+            dispatch(fetchSpecialtyFail());
+        }
+    }
+}
+export const fetchSpecialtySuccess = (res) => ({
+    type: actionTypes.USER_FETCH_SPECIALTY_SUCCESS,
+    res
+})
+
+export const fetchSpecialtyFail = () => ({
+    type: actionTypes.USER_FETCH_SPECIALTY_FAIL,
+})
+

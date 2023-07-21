@@ -38,6 +38,8 @@ class DoctorManageRedux extends Component {
             selectedOptionPrice: '',
             selectedOptionPaymentMethods: '',
             selectedOptionChooseProvince: '',
+            selectedOptionSpecialty: '',
+            arrSpecialtySelect: [],
             optionPriceVi: [],
             optionPriceEn: [],
             optionProvinceVi: [],
@@ -54,6 +56,7 @@ class DoctorManageRedux extends Component {
         this.props.fetchKeyInfoDoctorAllcodeSelect('price');
         this.props.fetchKeyInfoDoctorAllcodeSelect('province');
         this.props.fetchKeyInfoDoctorAllcodeSelect('payment');
+        this.props.fetchSpecialtySelect();
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.arrDoctor !== this.props.arrDoctor) {
@@ -80,7 +83,7 @@ class DoctorManageRedux extends Component {
             })
         }
         if (prevProps.provinceSelect !== this.props.provinceSelect) {
-            console.log('check props province', this.props.provinceSelect)
+            // console.log('check props province', this.props.provinceSelect)
             let optionsVi = [];
             let optionsEn = [];
             this.props.provinceSelect.map((item, index) => {
@@ -95,7 +98,7 @@ class DoctorManageRedux extends Component {
             })
         }
         if (prevProps.paymentMethodSelect !== this.props.paymentMethodSelect) {
-            console.log('check props payment', this.props.paymentMethodSelect)
+            // console.log('check props payment', this.props.paymentMethodSelect)
             let optionsVi = [];
             let optionsEn = [];
             this.props.paymentMethodSelect.map((item, index) => {
@@ -109,64 +112,88 @@ class DoctorManageRedux extends Component {
                 optionPaymentMethodVi: optionsVi
             })
         }
+        if (prevProps.arrSpecialtySelect !== this.props.arrSpecialtySelect) {
+            let arrOption = []
+            this.props.arrSpecialtySelect.map((item) => {
+                arrOption.push({ value: item.id, label: item.name })
+            })
+            this.setState({
+                arrSpecialtySelect: arrOption
+            })
+        }
     }
+
     handleEditorChange = ({ html, text }) => {
         this.setState({
             contentHTML: html,
             contentMarkdown: text
         })
-        console.log('handleEditorChange', html, text);
+        // console.log('handleEditorChange', html, text);
     }
     handleChange = async (selectedOption) => {
         let doctorSelect = this.props.arrDoctor.find(item => item.id === selectedOption.value);
 
-        if (doctorSelect.Markdown.id && doctorSelect.InfoDoctor.id) {
-            let selectPriceId = this.props.priceSelect.find(item => item.keyMap === doctorSelect.InfoDoctor.priceId);
-            let selectOptionPriceId = {
-                value: selectPriceId.keyMap,
-                label: this.props.language === languages.VI ? selectPriceId.valueVi : selectPriceId.valueEn
+        if (doctorSelect.Markdown.id || doctorSelect.InfoDoctor.id) {
+            if (doctorSelect.Markdown.id) {
+                this.setState({
+                    selectedOption,
+                    textareaValue: doctorSelect.Markdown.description,
+                    contentHTML: doctorSelect.Markdown.contentHTML,
+                    contentMarkdown: doctorSelect.Markdown.contentMarkdown,
+                    isOldData: true
+                })
             }
-            let selectProvinId = this.props.provinceSelect.find(item => item.keyMap === doctorSelect.InfoDoctor.provinceId);
-            let selectOptionProvinId = {
-                value: selectProvinId.keyMap,
-                label: this.props.language === languages.VI ? selectProvinId.valueVi : selectPriceId.valueEn
+            if (!doctorSelect.Markdown.id) {
+                this.setState({
+                    selectedOption,
+                    textareaValue: '',
+                    contentHTML: '',
+                    contentMarkdown: '',
+                    isOldData: false
+                })
             }
-            let selectPaymentId = this.props.paymentMethodSelect.find(item => item.keyMap === doctorSelect.InfoDoctor.paymentId);
-            let selectOptionPaymentId = {
-                value: selectPaymentId.keyMap,
-                label: this.props.language === languages.VI ? selectPaymentId.valueVi : selectPaymentId.valueEn
+
+            if (doctorSelect.InfoDoctor.id) {
+                let selectPriceId = this.props.priceSelect.find(item => item.keyMap === doctorSelect.InfoDoctor.priceId);
+                let selectOptionPriceId = {
+                    value: selectPriceId.keyMap,
+                    label: this.props.language === languages.VI ? selectPriceId.valueVi : selectPriceId.valueEn
+                }
+                let selectProvinId = this.props.provinceSelect.find(item => item.keyMap === doctorSelect.InfoDoctor.provinceId);
+                let selectOptionProvinId = {
+                    value: selectProvinId.keyMap,
+                    label: this.props.language === languages.VI ? selectProvinId.valueVi : selectPriceId.valueEn
+                }
+                let selectPaymentId = this.props.paymentMethodSelect.find(item => item.keyMap === doctorSelect.InfoDoctor.paymentId);
+                let selectOptionPaymentId = {
+                    value: selectPaymentId.keyMap,
+                    label: this.props.language === languages.VI ? selectPaymentId.valueVi : selectPaymentId.valueEn
+                }
+                this.setState({
+                    selectedOption,
+                    selectedOptionPrice: selectOptionPriceId,
+                    selectedOptionPaymentMethods: selectOptionPaymentId,
+                    selectedOptionChooseProvince: selectOptionProvinId,
+                    nameClinic: doctorSelect.InfoDoctor.nameClinic,
+                    addressClinic: doctorSelect.InfoDoctor.addressClinic,
+                    note: doctorSelect.InfoDoctor.note,
+                    isOldData: true
+                })
             }
-            this.setState({
-                selectedOption,
-                textareaValue: doctorSelect.Markdown.description,
-                contentHTML: doctorSelect.Markdown.contentHTML,
-                contentMarkdown: doctorSelect.Markdown.contentMarkdown,
-                selectedOptionPrice: selectOptionPriceId,
-                selectedOptionPaymentMethods: selectOptionPaymentId,
-                selectedOptionChooseProvince: selectOptionProvinId,
-                nameClinic: doctorSelect.InfoDoctor.nameClinic,
-                addressClinic: doctorSelect.InfoDoctor.addressClinic,
-                note: doctorSelect.InfoDoctor.note,
-                isOldData: true
-            })
+            if (!doctorSelect.InfoDoctor.id) {
+                this.setState({
+                    selectedOptionPrice: '',
+                    selectedOptionPaymentMethods: '',
+                    selectedOptionChooseProvince: '',
+                    nameClinic: '',
+                    addressClinic: '',
+                    note: '',
+                    isOldData: false
+                })
+            }
+
         }
-        else {
-            this.setState({
-                selectedOption,
-                textareaValue: '',
-                contentHTML: '',
-                contentMarkdown: '',
-                selectedOptionPrice: '',
-                selectedOptionPaymentMethods: '',
-                selectedOptionChooseProvince: '',
-                nameClinic: '',
-                addressClinic: '',
-                note: '',
-                isOldData: false
-            }, () =>
-                console.log(`Option selected:`, this.state.selectedOption)
-            );
-        }
+
 
     };
     handleChangeTextarea = (event) => {
@@ -176,7 +203,9 @@ class DoctorManageRedux extends Component {
     }
     handleSubmitCreate = async () => {
         let { contentHTML, contentMarkdown, selectedOption, selectedOptionPrice,
-            selectedOptionChooseProvince, selectedOptionPaymentMethods, nameClinic, addressClinic, note } = this.state;
+            selectedOptionChooseProvince, selectedOptionPaymentMethods, nameClinic, addressClinic, note,
+            selectedOptionSpecialty
+        } = this.state;
         let validateParameter = true;
         if (!selectedOption && !selectedOption.value) {
             toast.error('Missing doctor')
@@ -184,9 +213,10 @@ class DoctorManageRedux extends Component {
         else {
             let arrCheck = [contentHTML, contentMarkdown, !_.isEmpty(selectedOptionPrice),
                 !_.isEmpty(selectedOptionChooseProvince), !_.isEmpty(selectedOptionPaymentMethods),
-                nameClinic, addressClinic, note];
+                nameClinic, addressClinic, note, !_.isEmpty(selectedOptionSpecialty)];
             let arrMessage = ['Missing content', 'Missing content', 'Missing Price', 'Missing Province',
-                'Missing Payment Method', 'Missing Name Clinic', 'Missing Address Clinic', 'Missing Note']
+                'Missing Payment Method', 'Missing Name Clinic', 'Missing Address Clinic', 'Missing Note',
+                'Missing Specialty']
             for (let i = 0; i < arrCheck.length; i++) {
                 if (!arrCheck[i]) {
                     validateParameter = false
@@ -208,11 +238,17 @@ class DoctorManageRedux extends Component {
                     paymentId: this.state.selectedOptionPaymentMethods.value,
                     nameClinic: this.state.nameClinic,
                     addressClinic: this.state.addressClinic,
-                    note: this.state.note
+                    note: this.state.note,
+                    specialtyId: this.state.selectedOptionSpecialty.value
                 })
             }
         }
 
+    }
+    handleChangeSpecialty = (selected) => {
+        this.setState({
+            selectedOptionSpecialty: selected
+        })
     }
     handleChangeOther = async (selected) => {
         // console.log('check value select', selected)
@@ -232,7 +268,6 @@ class DoctorManageRedux extends Component {
                 selectedOptionChooseProvince: selected
             })
         }
-
     }
     handleChangeInputInfoDoctor = (e, key) => {
         let copyState = this.state;
@@ -242,9 +277,8 @@ class DoctorManageRedux extends Component {
         })
     }
     render() {
-        console.log('check props doctor select', this.props.arrDoctor)
         let { textareaValue, arrDoctorVi, isOldData, optionPriceVi, optionPriceEn, optionProvinceEn, optionProvinceVi,
-            optionPaymentMethodEn, optionPaymentMethodVi, nameClinic, addressClinic, note
+            optionPaymentMethodEn, optionPaymentMethodVi, nameClinic, addressClinic, note, arrSpecialtySelect
         } = this.state
 
         return (
@@ -255,7 +289,7 @@ class DoctorManageRedux extends Component {
                 <form>
                     <div className='information-doctor row mb-3'>
                         <div className='select-option-react col-6'>
-                            <lable className="form-label"><FormattedMessage id={"manage-user.choose-doctor"} /></lable>
+                            <label className="form-label"><FormattedMessage id={"manage-user.choose-doctor"} /></label>
                             <Select
                                 value={this.state.selectedOption}
                                 onChange={this.handleChange}
@@ -263,12 +297,12 @@ class DoctorManageRedux extends Component {
                             />
                         </div>
                         <div className='additional-information col-6'>
-                            <lable className="form-label"><FormattedMessage id={"manage-user.description"} /></lable>
+                            <label className="form-label"><FormattedMessage id={"manage-user.description"} /></label>
                             <textarea value={textareaValue} onChange={(event) => this.handleChangeTextarea(event)} className='form-control'></textarea>
                         </div>
 
                         <div className='choose-price col-4 mt-3'>
-                            <lable className="form-label"><FormattedMessage id={"manage-user.choose-price"} /></lable>
+                            <label className="form-label"><FormattedMessage id={"manage-user.choose-price"} /></label>
                             <Select
                                 value={this.state.selectedOptionPrice}
                                 onChange={this.handleChangeOther}
@@ -276,7 +310,7 @@ class DoctorManageRedux extends Component {
                             />
                         </div>
                         <div className='payment-methods col-4 mt-3'>
-                            <lable className="form-label"><FormattedMessage id={"manage-user.payment-method"} /></lable>
+                            <label className="form-label"><FormattedMessage id={"manage-user.payment-method"} /></label>
                             <Select
                                 value={this.state.selectedOptionPaymentMethods}
                                 onChange={this.handleChangeOther}
@@ -284,7 +318,7 @@ class DoctorManageRedux extends Component {
                             />
                         </div>
                         <div className='choose-province col-4 mt-3'>
-                            <lable className="form-label"><FormattedMessage id={"manage-user.choose-province"} /></lable>
+                            <label className="form-label"><FormattedMessage id={"manage-user.choose-province"} /></label>
                             <Select
                                 value={this.state.selectedOptionChooseProvince}
                                 onChange={this.handleChangeOther}
@@ -293,18 +327,25 @@ class DoctorManageRedux extends Component {
                         </div>
 
                         <div className='name-clinic col-4 mt-3'>
-                            <lable className="form-label"><FormattedMessage id={"manage-user.name-clinic"} /></lable>
-                            <input type="text" value={nameClinic} onChange={(e) => this.handleChangeInputInfoDoctor(e, 'nameClinic')} class="form-control" />
+                            <label className="form-label"><FormattedMessage id={"manage-user.name-clinic"} /></label>
+                            <input type="text" value={nameClinic} onChange={(e) => this.handleChangeInputInfoDoctor(e, 'nameClinic')} className="form-control" />
                         </div>
                         <div className='address-clinic col-4 mt-3'>
-                            <lable className="form-label"><FormattedMessage id={"manage-user.address-clinic"} /></lable>
-                            <input type="text" value={addressClinic} onChange={(e) => this.handleChangeInputInfoDoctor(e, 'addressClinic')} class="form-control" />
+                            <label className="form-label"><FormattedMessage id={"manage-user.address-clinic"} /></label>
+                            <input type="text" value={addressClinic} onChange={(e) => this.handleChangeInputInfoDoctor(e, 'addressClinic')} className="form-control" />
                         </div>
                         <div className='note col-4 mt-3'>
-                            <lable className="form-label"><FormattedMessage id={"manage-user.note"} /></lable>
-                            <input type="text" value={note} onChange={(e) => this.handleChangeInputInfoDoctor(e, 'note')} class="form-control" />
+                            <label className="form-label"><FormattedMessage id={"manage-user.note"} /></label>
+                            <input type="text" value={note} onChange={(e) => this.handleChangeInputInfoDoctor(e, 'note')} className="form-control" />
                         </div>
-
+                        <div className='choose-specialty col-4 mt-3'>
+                            <label className="form-label"><FormattedMessage id={"manage-user.choose-specialty"} /></label>
+                            <Select
+                                value={this.state.selectedOptionSpecialty}
+                                onChange={this.handleChangeSpecialty}
+                                options={arrSpecialtySelect}
+                            />
+                        </div>
 
                     </div>
                 </form>
@@ -329,7 +370,8 @@ const mapStateToProps = state => {
         priceSelect: state.admin.priceSelect,
         provinceSelect: state.admin.provinceSelect,
         paymentMethodSelect: state.admin.paymentMethodSelect,
-        language: state.app.language
+        language: state.app.language,
+        arrSpecialtySelect: state.admin.arrSpecialtySelect
     };
 };
 
@@ -338,8 +380,8 @@ const mapDispatchToProps = dispatch => {
         fetchDoctorSelect: () => dispatch(adminActions.fetchDoctorSelectStart()),
         fetchKeyInfoDoctorAllcodeSelect: (type) => dispatch(adminActions.fetchKeyInfoDoctorAllcodeSelectStart(type)),
         createDoctorMarkdown: (inputData) => dispatch(adminActions.createDoctorMarkdownStart(inputData)),
-        createInfoDoctor: (inputData) => dispatch(adminActions.createInfoDoctorStart(inputData))
-
+        createInfoDoctor: (inputData) => dispatch(adminActions.createInfoDoctorStart(inputData)),
+        fetchSpecialtySelect: () => dispatch(adminActions.fetchSpecialtySelectStart())
     };
 };
 

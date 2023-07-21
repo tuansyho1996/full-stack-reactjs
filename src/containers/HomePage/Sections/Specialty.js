@@ -4,28 +4,38 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import './Specialty.scss';
-import imgMusculoskeletal from '../../../assets/specialty-co-xuong-khop.jpg';
-import imgNerve from '../../../assets/specialty-than-kinh.jpg';
-import imgDigest from '../../../assets/specialty-tieu-hoa.jpg';
-import imgHeart from '../../../assets/specialty-tim-mach.jpg';
-import imgSense from '../../../assets/specialty-tai-mui-hong.jpg';
-import imgSpine from '../../../assets/specialty-cot-song.jpg';
-import imgTraditional from '../../../assets/specialty-y-hoc-co-truyen.jpg';
-import imgAcupuncture from '../../../assets/specialty-cham-cuu.jpg';
+import * as userAction from '../../../store/actions';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+
+
 
 class Specialty extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            specialtyHomepage: []
+        }
+    }
+
+    componentDidMount() {
+        this.props.fetchSpecialty('ALL')
+    }
+    async componentDidUpdate(prevProps, prevState) {
+        if (prevProps.specialtyHomepage !== this.props.specialtyHomepage) {
+            await this.props.specialtyHomepage.map((item, index) => {
+                item.image = new Buffer(item.image, 'base64').toString('binary');
+            })
+            this.setState({
+                specialtyHomepage: this.props.specialtyHomepage
+            })
+        }
+    }
+    handleClickElementSpecialty = () => {
+
+    }
     render() {
-        let arrSpecialty = [
-            { img: imgMusculoskeletal, title: 'Cơ xương khớp' },
-            { img: imgNerve, title: 'Thần kinh' },
-            { img: imgDigest, title: 'Tiêu hóa' },
-            { img: imgHeart, title: 'Tim mạch' },
-            { img: imgSense, title: 'Tai mũi họng' },
-            { img: imgSpine, title: 'Cột sống' },
-            { img: imgTraditional, title: 'Y học cổ truyền' },
-            { img: imgAcupuncture, title: 'Châm cứu' }];
-        let arrTitleSpecialty = [, , , , , , ,];
+        let { specialtyHomepage } = this.state
         let settings = this.props.settings;
 
         return (
@@ -37,21 +47,24 @@ class Specialty extends Component {
                     </div>
                     <Slider {...settings}>
                         {
-                            arrSpecialty &&
-                            arrSpecialty.map((item, index) => {
+                            specialtyHomepage &&
+                            specialtyHomepage.map((item, index) => {
                                 return (
-                                    <div key={index}>
-                                        <img src={item.img} />
-                                        <span>{item.title}</span>
-                                    </div>
+                                    <Link to={{
+                                        pathname: "/detail-specialty",
+                                        search: `?id=${item.id}`,
+                                    }}>
+                                        <div className='element-specialty' key={index} onClick={() => this.handleClickElementSpecialty()}>
+                                            <img src={item.image} />
+                                            <span>{item.name}</span>
+                                        </div>
+                                    </Link>
                                 )
                             })
                         }
                     </Slider>
 
                 </div>
-
-
             </div>
         );
     }
@@ -60,11 +73,13 @@ class Specialty extends Component {
 
 const mapStateToProps = state => {
     return {
+        specialtyHomepage: state.user.specialtyHomepage
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchSpecialty: (id) => dispatch(userAction.fetchSpecialtyStart(id))
     };
 };
 

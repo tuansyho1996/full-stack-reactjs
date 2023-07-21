@@ -9,7 +9,8 @@ const initialState = {
     arrTimeAllcode: [],
     priceSelect: [],
     provinceSelect: [],
-    paymentMethodSelect: []
+    paymentMethodSelect: [],
+    arrSpecialtySelect: []
 }
 
 const appReducer = (state = initialState, action) => {
@@ -130,7 +131,7 @@ const appReducer = (state = initialState, action) => {
                 }
             }
             if (action.res.key === 'province') {
-                console.log(`check run start KEY INFO DOCTOR ${action.res.key}  time`, action.res.data)
+                // console.log(`check run start KEY INFO DOCTOR ${action.res.key}  time`, action.res.data)
 
                 return {
                     ...state,
@@ -138,7 +139,7 @@ const appReducer = (state = initialState, action) => {
                 }
             }
             if (action.res.key === 'payment') {
-                console.log(`check run start KEY INFO DOCTOR ${action.res.key}  time`, action.res.data)
+                // console.log(`check run start KEY INFO DOCTOR ${action.res.key}  time`, action.res.data)
                 return {
                     ...state,
                     paymentMethodSelect: action.res.data
@@ -149,7 +150,25 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
-
+        //CREATE SPECIALTY
+        case actionTypes.ADMIN_CREATE_SPECIALTY__SUCCESS:
+            return {
+                ...state,
+            }
+        case actionTypes.ADMIN_CREATE_SPECIALTY__FAIL:
+            return {
+                ...state,
+            }
+        //FETCH SPECIALTY SELECT PAGE MANAGE DOCTOR
+        case actionTypes.ADMIN_FETCH_SPECIALTY_SELECT_SUCCESS:
+            state.arrSpecialtySelect = action.data
+            return {
+                ...state,
+            }
+        case actionTypes.ADMIN_FETCH_SPECIALTY_SELECT_FAIL:
+            return {
+                ...state,
+            }
         default:
             return state;
     }

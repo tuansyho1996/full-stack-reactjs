@@ -1,0 +1,17 @@
+.specialty-manage-container{
+    .title-specialty-manage{
+        text-align: center;
+        font-size: 20px;
+        margin: 30px 0;
+    }
+    .specialty-manage-content{
+        #upload-img-specialty{
+            border: none;
+            outline: none;
+        }
+        .bg-upload-img-current{
+            height:200px;
+            width: 200px;
+        }
+    }
+}

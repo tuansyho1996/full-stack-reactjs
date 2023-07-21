@@ -69,12 +69,23 @@ const fetchVerifyBookingEmailService = async (token, doctorId) => {
     let res = await axios.get(`/api/verify-email-book-appointment-schedule?token=${token}&doctorId=${doctorId}`);
     return res
 }
-
-
+const createSpecialtyService = async (data) => {
+    let res = await axios.post('/api/create-specialty', data);
+    return res
+}
+const fetchSpecialtyService = async (id) => {
+    let res = await axios.get(`/api/fetch-specialty?id=${id}`);
+    return res
+}
+const fetchSpecialtySelectService = async () => {
+    let res = await axios.get(`/api/fetch-specialty-select`);
+    return res
+}
 export {
     handleLogin, getAllUser, createNewUserService, deleteUser, editUserService,
     getAllcodeService, fetchTopDoctorHomepageService, fetchDoctorSlectService,
     createDoctorMarkdownService, fetchDetailADoctor, bulkCreateSchedule, fetchTimeSchedule,
     fetchKeyInfoDoctorAllcodeSelectService, createInfoDoctorService, fetchInfoDoctorService,
-    createAppointmentScheduleService, fetchVerifyBookingEmailService
+    createAppointmentScheduleService, fetchVerifyBookingEmailService, createSpecialtyService,
+    fetchSpecialtyService, fetchSpecialtySelectService
 }

@@ -34,6 +34,7 @@ class DetailDoctor extends Component {
                 />
                 <div className='container-section container'>
                     <Infomation
+                        infoDoctor={infoDoctor}
                     />
                     <ChooseScheduleAndInfoDoctor
                         paramsId={this.props.match.params.id}
