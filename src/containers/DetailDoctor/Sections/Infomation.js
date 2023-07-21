@@ -13,20 +13,19 @@ class Information extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            infoDoctor: {},
-
+            // infoDoctor: {},
         }
     }
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.infoDoctor !== this.props.infoDoctor) {
-            this.setState({
-                infoDoctor: this.props.infoDoctor
-            })
-        }
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (prevProps.infoDoctor !== this.props.infoDoctor) {
+    //         this.setState({
+    //             infoDoctor: this.props.infoDoctor
+    //         })
+    //     }
+    // }
 
     render() {
-        let { infoDoctor } = this.state;
+        let { infoDoctor } = this.props;
         console.log('check state infodoctor infomation', infoDoctor)
         return (
             <div className='infomation-detail-doctor-container'>
@@ -63,7 +62,7 @@ class Information extends Component {
 
 const mapStateToProps = state => {
     return {
-        infoDoctor: state.user.infoDoctor
+        // infoDoctor: state.user.infoDoctor
     };
 };
 
