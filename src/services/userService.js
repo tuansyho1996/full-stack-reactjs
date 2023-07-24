@@ -81,11 +81,15 @@ const fetchSpecialtySelectService = async () => {
     let res = await axios.get(`/api/fetch-specialty-select`);
     return res
 }
+const fetchListDoctorSpecialtyService = async (specialtyId) => {
+    let res = await axios.get(`/api/fetch-list-doctor-specialty?specialtyId=${specialtyId}`);
+    return res
+}
 export {
     handleLogin, getAllUser, createNewUserService, deleteUser, editUserService,
     getAllcodeService, fetchTopDoctorHomepageService, fetchDoctorSlectService,
     createDoctorMarkdownService, fetchDetailADoctor, bulkCreateSchedule, fetchTimeSchedule,
     fetchKeyInfoDoctorAllcodeSelectService, createInfoDoctorService, fetchInfoDoctorService,
     createAppointmentScheduleService, fetchVerifyBookingEmailService, createSpecialtyService,
-    fetchSpecialtyService, fetchSpecialtySelectService
+    fetchSpecialtyService, fetchSpecialtySelectService, fetchListDoctorSpecialtyService
 }

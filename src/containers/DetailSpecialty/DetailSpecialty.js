@@ -22,7 +22,6 @@ class DetailSpecialty extends Component {
     componentDidMount() {
         let { id } = queryString.parse(this.props.location.search)
         this.props.fetchSpecialty(id);
-
     }
     async componentDidUpdate(prevProps, prevState) {
         if (prevProps.specialtyDetail !== this.props.specialtyDetail) {
@@ -33,15 +32,17 @@ class DetailSpecialty extends Component {
     }
     render() {
         return (
-            <Fragment>
+            <div className='detail-specialty-container'>
                 <Header
                     isBanner={false}
                 />
                 <InfoSpecialty
                     detailSpecialty={this.state.detailSpecialty}
                 />
-                <ListDoctorSpecialty />
-            </Fragment>
+                <ListDoctorSpecialty
+                    specialtyId={queryString.parse(this.props.location.search).id}
+                />
+            </div>
         );
     }
 

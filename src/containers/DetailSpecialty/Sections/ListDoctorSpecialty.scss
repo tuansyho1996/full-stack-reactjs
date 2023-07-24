@@ -1,0 +1,12 @@
+.list-specialty-doctor-container{
+    background-color: #ddd;
+    
+    .list-specialty-doctor-content{
+        background-color: #fff;
+        border: solid 1px #fff;
+        border-radius: 10px;
+        .element-specialty-doctor{
+            border-bottom: solid 1px #ddd
+        }
+    }
+}

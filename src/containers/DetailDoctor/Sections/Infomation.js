@@ -26,25 +26,27 @@ class Information extends Component {
 
     render() {
         let { infoDoctor } = this.props;
-        console.log('check state infodoctor infomation', infoDoctor)
+        // console.log('check state infodoctor infomation', )
         return (
             <div className='infomation-detail-doctor-container'>
-                <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><i className="fas fa-home"></i></li>
-                        <li className="breadcrumb-item">Library</li>
-                        <li className="breadcrumb-item ">Data</li>
-                    </ol>
-                </nav>
+                {this.props.isBreadcrumb &&
+                    <nav aria-label="breadcrumb">
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><i className="fas fa-home"></i></li>
+                            <li className="breadcrumb-item">Library</li>
+                            <li className="breadcrumb-item ">Data</li>
+                        </ol>
+                    </nav>
+                }
                 <div className='info-doctor-content row'>
                     <div className='avartar-doctor col-2'>
-                        {Object.keys(infoDoctor).length !== 0 &&
+                        {!_.isEmpty(infoDoctor) !== 0 &&
                             <div className='bg-image' style={{ backgroundImage: `url(${infoDoctor.image})` }}></div>
                         }
                     </div>
-                    <div className='description-doctor col-6'>
+                    <div className='description-doctor col-8'>
                         {
-                            Object.keys(infoDoctor).length !== 0 && infoDoctor.firstName && infoDoctor.lastName &&
+                            !_.isEmpty(infoDoctor) !== 0 && infoDoctor.firstName && infoDoctor.lastName &&
                             <h2 className='title-doctor'>{infoDoctor.firstName}&nbsp;{infoDoctor.lastName}</h2>
                         }
                         {infoDoctor && infoDoctor.Markdown && infoDoctor.Markdown.description &&

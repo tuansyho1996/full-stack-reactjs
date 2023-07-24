@@ -8,7 +8,8 @@ const initialState = {
     infoDoctorSchedule: {},
     isVerifyBookingEmail: false,
     specialtyHomepage: [],
-    specialtyDetail: {}
+    specialtyDetail: {},
+    listDoctorPageDetailSpecialty: []
 }
 
 const appReducer = (state = initialState, action) => {
@@ -92,6 +93,16 @@ const appReducer = (state = initialState, action) => {
                 ...state,
             }
         case actionTypes.USER_FETCH_SPECIALTY_FAIL:
+            return {
+                ...state,
+            }
+        //FETCH LIST DOCTOR SPECIALTY
+        case actionTypes.USER_FETCH_LIST_DOCTOR_SPECIALTY_SUCCESS:
+            state.listDoctorPageDetailSpecialty = action.res
+            return {
+                ...state,
+            }
+        case actionTypes.USER_FETCH_LIST_DOCTOR_SPECIALTY_FAIL:
             return {
                 ...state,
             }

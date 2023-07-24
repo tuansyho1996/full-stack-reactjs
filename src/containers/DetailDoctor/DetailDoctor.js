@@ -35,9 +35,11 @@ class DetailDoctor extends Component {
                 <div className='container-section container'>
                     <Infomation
                         infoDoctor={infoDoctor}
+                        isbreadcrumb={true}
                     />
                     <ChooseScheduleAndInfoDoctor
                         paramsId={this.props.match.params.id}
+                        isRow={true}
                     />
                     <hr />
                     <div className='markdown-detail-doctor-content my-5'>

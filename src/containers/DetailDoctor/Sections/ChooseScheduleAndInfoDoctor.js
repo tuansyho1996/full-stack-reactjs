@@ -21,7 +21,7 @@ class ChooseScheduleAndInfoDoctor extends Component {
             arrTimeSlectdate: [],
             seeMore: false,
             isModal: false,
-            timePick: {}
+            timePick: {},
         }
     }
     handleFetchTimeSchedule = async (doctorId, currentDate) => {
@@ -35,7 +35,6 @@ class ChooseScheduleAndInfoDoctor extends Component {
         })
     }
     async componentDidMount() {
-        console.log('check id doctor', this.props.paramsId)
         this.props.fetchInfoDoctor(this.props.paramsId);
         let arrTimeSlectdate = []
         for (let i = 0; i < 7; i++) {
@@ -52,7 +51,6 @@ class ChooseScheduleAndInfoDoctor extends Component {
     componentDidUpdate(prevProps, prevState) {
 
         if (prevProps.infoDoctorSchedule !== this.props.infoDoctorSchedule) {
-            console.log('check props info doctor schedule', this.props.infoDoctorSchedule)
             this.setState({
                 infoDoctorSchedule: this.props.infoDoctorSchedule
             })
@@ -82,9 +80,10 @@ class ChooseScheduleAndInfoDoctor extends Component {
     }
     render() {
         let { infoDoctorSchedule, arrTimeSlectdate, arrTimeSchedule, seeMore } = this.state;
+        let { isRow } = this.props
         return (
-            <div className='schedule-info-doctor row my-3'>
-                <div className='content-left-info-schedule-doctor col-7'>
+            <div className={'schedule-info-doctor my-3' + (isRow ? 'row' : '')}>
+                <div className={'content-left-info-schedule-doctor ' + (isRow ? 'col-7' : '')} style={{ borderRight: isRow ? '' : 'none' }}>
                     <select onChange={(event) => this.handleChangeTime(event)} className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                         {arrTimeSlectdate && arrTimeSlectdate.length !== 0 &&
                             arrTimeSlectdate.map((time, index) => {
@@ -109,7 +108,7 @@ class ChooseScheduleAndInfoDoctor extends Component {
                     </div>
                 </div>
                 {!_.isEmpty(infoDoctorSchedule) &&
-                    <div className='content-right-info-schedule-doctor col-5'>
+                    <div className={'content-right-info-schedule-doctor ' + (isRow ? 'col-5' : '')}>
                         <div className='title-address-clinic'>ĐỊA CHỈ KHÁM</div>
                         <div className='name-clinic'>{infoDoctorSchedule.nameClinic}</div>
                         <div className='address-clinic'>{infoDoctorSchedule.addressClinic}</div>

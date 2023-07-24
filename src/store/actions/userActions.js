@@ -1,7 +1,8 @@
 import actionTypes from './actionTypes';
 import {
     fetchTopDoctorHomepageService, fetchDetailADoctor, fetchInfoDoctorService,
-    createAppointmentScheduleService, fetchVerifyBookingEmailService, fetchSpecialtyService
+    createAppointmentScheduleService, fetchVerifyBookingEmailService, fetchSpecialtyService,
+    fetchListDoctorSpecialtyService
 } from '../../services/userService'
 import { toast } from 'react-toastify';
 
@@ -57,7 +58,7 @@ export const fetchDetailDoctorStart = (id) => {
         try {
             let res = await fetchDetailADoctor(id);
             if (res) {
-                res.user.image = await new Buffer(res.user.image, 'base64').toString('binary');
+                res.user.image = new Buffer(res.user.image, 'base64').toString('binary');
             }
             if (res && res.errorCode === 0) {
                 dispatch(fetchDetailDoctorSuccess(res.user));
@@ -158,7 +159,7 @@ export const fetchVerifyBookingEmailFail = () => ({
 export const fetchSpecialtyStart = (id) => {
     return async (dispatch, getState) => {
         try {
-            console.log('check run fetch specialty')
+            // console.log('check run fetch specialty')
             let res = await fetchSpecialtyService(id)
             if (res.errorCode === 0) {
                 dispatch(fetchSpecialtySuccess({
@@ -180,4 +181,29 @@ export const fetchSpecialtySuccess = (res) => ({
 export const fetchSpecialtyFail = () => ({
     type: actionTypes.USER_FETCH_SPECIALTY_FAIL,
 })
+//FETCH LIST DOCTOR SPECIALTY
+export const fetchListDoctorSpecialtyStart = (specialtyId) => {
+    return async (dispatch, getState) => {
+        try {
+            // console.log('check run fetch specialty')
+            let res = await fetchListDoctorSpecialtyService(specialtyId)
+            res.data.map((item) => {
+                item.image = new Buffer(item.image, 'base64').toString('binary');
+            })
+            if (res.errorCode === 0) {
+                dispatch(fetchListDoctorSpecialtySuccess(res.data));
+            }
+        }
+        catch (e) {
+            dispatch(fetchListDoctorSpecialtyFail());
+        }
+    }
+}
+export const fetchListDoctorSpecialtySuccess = (res) => ({
+    type: actionTypes.USER_FETCH_LIST_DOCTOR_SPECIALTY_SUCCESS,
+    res
+})
 
+export const fetchListDoctorSpecialtyFail = () => ({
+    type: actionTypes.USER_FETCH_LIST_DOCTOR_SPECIALTY_FAIL,
+})

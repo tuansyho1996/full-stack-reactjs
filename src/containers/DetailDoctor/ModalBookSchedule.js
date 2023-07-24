@@ -83,7 +83,6 @@ class ModalBookSchedule extends Component {
     }
     render() {
         let { infoDoctor, dateHtml, arrGender } = this.state;
-        console.log('check time', this.props.timePick)
         return (
             <Modal isOpen={this.props.isModal} toggle={this.toggleBookSchedule} size='lg'>
                 <ModalHeader toggle={this.toggleBookSchedule}>Thông tin đặt lịch khám bệnh</ModalHeader>
